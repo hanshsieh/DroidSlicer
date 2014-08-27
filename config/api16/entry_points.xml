@@ -1,0 +1,106 @@
+<?xml version="1.0" ?>
+<entry-spec>
+	<activity>
+		<method signature="void onActionModeFinished(android.view.ActionMode)" static="false"/>
+		<method signature="void onActionModeStarted(android.view.ActionMode)" static="false"/>
+		<method signature="void onApplyThemeResource(android.content.res.Resources$Theme, int, boolean)" static="false"/>
+		<method signature="void onAttachFragment(android.app.Fragment)" static="false"/>
+		<method signature="void onAttachedToWindow()" static="false"/>
+		<method signature="void onBackPressed()" static="false"/>
+		<method signature="void onChildTitleChanged(android.app.Activity, java.lang.CharSequence)" static="false"/>
+		<method signature="void onConfigurationChanged(android.content.res.Configuration)" static="false"/>
+		<method signature="void onContentChanged()" static="false"/>
+		<method signature="boolean onContextItemSelected(android.view.MenuItem)" static="false"/>
+		<method signature="void onContextMenuClosed(android.view.Menu)" static="false"/>
+		<method signature="void onCreate(android.os.Bundle)" static="false"/>
+		<method signature="void onCreateContextMenu(android.view.ContextMenu, android.view.View, android.view.ContextMenu$ContextMenuInfo)" static="false"/>
+		<method signature="java.lang.CharSequence onCreateDescription()" static="false"/>
+		<method signature="android.app.Dialog onCreateDialog(int)" static="false"/>
+		<method signature="android.app.Dialog onCreateDialog(int, android.os.Bundle)" static="false"/>
+		<method signature="void onCreateNavigateUpTaskStack(android.app.TaskStackBuilder)" static="false"/>
+		<method signature="boolean onCreateOptionsMenu(android.view.Menu)" static="false"/>
+		<method signature="boolean onCreatePanelMenu(int, android.view.Menu)" static="false"/>
+		<method signature="android.view.View onCreatePanelView(int)" static="false"/>
+		<method signature="boolean onCreateThumbnail(android.graphics.Bitmap, android.graphics.Canvas)" static="false"/>
+		<method signature="android.view.View onCreateView(android.view.View, java.lang.String, android.content.Context, android.util.AttributeSet)" static="false"/>
+		<method signature="android.view.View onCreateView(java.lang.String, android.content.Context, android.util.AttributeSet)" static="false"/>
+		<method signature="void onDestroy()" static="false"/>
+		<method signature="void onDetachedFromWindow()" static="false"/>
+		<method signature="boolean onGenericMotionEvent(android.view.MotionEvent)" static="false"/>
+		<method signature="boolean onKeyDown(int, android.view.KeyEvent)" static="false"/>
+		<method signature="boolean onKeyLongPress(int, android.view.KeyEvent)" static="false"/>
+		<method signature="boolean onKeyMultiple(int, int, android.view.KeyEvent)" static="false"/>
+		<method signature="boolean onKeyShortcut(int, android.view.KeyEvent)" static="false"/>
+		<method signature="boolean onKeyUp(int, android.view.KeyEvent)" static="false"/>
+		<method signature="void onLowMemory()" static="false"/>
+		<method signature="boolean onMenuItemSelected(int, android.view.MenuItem)" static="false"/>
+		<method signature="boolean onMenuOpened(int, android.view.Menu)" static="false"/>
+		<method signature="boolean onNavigateUp()" static="false"/>
+		<method signature="boolean onNavigateUpFromChild(android.app.Activity)" static="false"/>
+		<method signature="void onNewIntent(android.content.Intent)" static="false" param1="track"/>
+		<method signature="boolean onOptionsItemSelected(android.view.MenuItem)" static="false"/>
+		<method signature="void onOptionsMenuClosed(android.view.Menu)" static="false"/>
+		<method signature="void onPanelClosed(int, android.view.Menu)" static="false"/>
+		<method signature="void onPause()" static="false"/>
+		<method signature="void onPostCreate(android.os.Bundle)" static="false"/>
+		<method signature="void onPostResume()" static="false"/>
+		<method signature="void onPrepareDialog(int, android.app.Dialog)" static="false"/>
+		<method signature="void onPrepareDialog(int, android.app.Dialog, android.os.Bundle)" static="false"/>
+		<method signature="void onPrepareNavigateUpTaskStack(android.app.TaskStackBuilder)" static="false"/>
+		<method signature="boolean onPrepareOptionsMenu(android.view.Menu)" static="false"/>
+		<method signature="boolean onPreparePanel(int, android.view.View, android.view.Menu)" static="false"/>
+		<method signature="void onRestart()" static="false"/>
+		<method signature="void onRestoreInstanceState(android.os.Bundle)" static="false"/>
+		<method signature="void onResume()" static="false"/>
+		<method signature="java.lang.Object onRetainNonConfigurationInstance()" static="false"/>
+		<method signature="void onSaveInstanceState(android.os.Bundle)" static="false"/>
+		<method signature="boolean onSearchRequested()" static="false"/>
+		<method signature="void onStart()" static="false"/>
+		<method signature="void onStop()" static="false"/>
+		<method signature="void onTitleChanged(java.lang.CharSequence, int)" static="false"/>
+		<method signature="boolean onTouchEvent(android.view.MotionEvent)" static="false"/>
+		<method signature="boolean onTrackballEvent(android.view.MotionEvent)" static="false"/>
+		<method signature="void onTrimMemory(int)" static="false"/>
+		<method signature="void onUserInteraction()" static="false"/>
+		<method signature="void onUserLeaveHint()" static="false"/>
+		<method signature="void onWindowAttributesChanged(android.view.WindowManager$LayoutParams)" static="false"/>
+		<method signature="void onWindowFocusChanged(boolean)" static="false"/>
+		<method signature="android.view.ActionMode onWindowStartingActionMode(android.view.ActionMode$Callback)" static="false"/>
+	</activity>
+	<receiver>
+		<method signature="void onReceive(android.content.Context, android.content.Intent)" static="false" param2="track"/>
+	</receiver>
+	<provider>
+		<method signature="int bulkInsert(android.net.Uri, android.content.ContentValues[])" static="false"/>
+		<method signature="int delete(android.net.Uri, java.lang.String, java.lang.String[])" static="false" param1="track" param2="track" param3="track"/>
+		<method signature="java.lang.String getType(android.net.Uri)" static="false" param1="track"/>
+		<method signature="android.net.Uri insert(android.net.Uri, android.content.ContentValues)" static="false" param1="track" param2="track"/>
+		<method signature="void onConfigurationChanged(android.content.res.Configuration)" static="false"/>
+		<method signature="boolean onCreate()" static="false"/>
+		<method signature="void onLowMemory()" static="false"/>
+		<method signature="void onTrimMemory(int)" static="false"/>
+		<method signature="android.database.Cursor query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String)" static="false" param1="track" param2="track" param3="track" param4="track" param5="track"/>
+		<method signature="android.database.Cursor query(android.net.Uri, java.lang.String[], java.lang.String, java.lang.String[], java.lang.String, android.os.CancellationSignal)" static="false" param1="track" param2="track" param3="track" param4="track" param5="track" param6="track"/>
+		<method signature="int update(android.net.Uri, android.content.ContentValues, java.lang.String, java.lang.String[])" static="false" param1="track" param2="track" param3="track" param4="track"/>
+	</provider>
+	<service>
+		<method signature="android.os.IBinder onBind(android.content.Intent)" static="false" param1="track"/>
+		<method signature="void onConfigurationChanged(android.content.res.Configuration)" static="false"/>
+		<method signature="void onCreate()" static="false"/>
+		<method signature="void onDestroy()" static="false"/>
+		<method signature="void onLowMemory()" static="false"/>
+		<method signature="void onRebind(android.content.Intent)" static="false" param1="track"/>
+		<method signature="void onStart(android.content.Intent, int)" static="false" param1="track"/>
+		<method signature="int onStartCommand(android.content.Intent, int, int)" static="false" param1="track"/>
+		<method signature="void onTaskRemoved(android.content.Intent)" static="false" param1="track"/>
+		<method signature="void onTrimMemory(int)" static="false"/>
+		<method signature="boolean onUnbind(android.content.Intent)" static="false" param1="track"/>
+	</service>
+	<application>
+		<method signature="void onConfigurationChanged(android.content.res.Configuration)" static="false"/>
+		<method signature="void onCreate()" static="false"/>
+		<method signature="void onLowMemory()" static="false"/>
+		<method signature="void onTerminate()" static="false"/>
+		<method signature="void onTrimMemory(int)" static="false"/>
+	</application>
+</entry-spec>

@@ -1,0 +1,302 @@
+<?xml version="1.0" ?>
+<!--
+Auto-generated file from PScout intent-permission file.
+You may need to modify the intent-permission associated with android.permission.NFC.
+For example: 
+<intent action="android.nfc.action.NDEF_DISCOVERED">
+	<receiver permission="android.permission.NFC"/>
+</intent>
+<intent action="android.nfc.action.TECH_DISCOVERED">
+	<receiver permission="android.permission.NFC"/>
+</intent>
+<intent action="android.nfc.action.TAG_DISCOVERED">
+	<receiver permission="android.permission.NFC"/>
+</intent>
+
+Some intent broadcasted by system do not require permissions. These Intent's are not
+included by PScout. For example: 
+<intent action="android.intent.action.USER_PRESENT">
+</intent>
+<intent action="android.intent.action.USER_INITIALIZE">
+</intent>
+<intent action="android.intent.action.USER_FOREGROUND">
+</intent>
+<intent action="android.intent.action.USER_BACKGROUND">
+</intent>
+<intent action="android.intent.action.SCREEN_ON">
+</intent>
+<intent action="android.intent.action.SCREEN_OFF">
+</intent>
+<intent action="android.intent.action.SIG_STR">
+</intent>
+-->
+<intent-spec>
+	<intent action="android.nfc.action.NDEF_DISCOVERED">
+		<receiver permission="android.permission.NFC"/>
+	</intent>
+	<intent action="android.nfc.action.TECH_DISCOVERED">
+		<receiver permission="android.permission.NFC"/>
+	</intent>
+	<intent action="android.nfc.action.TAG_DISCOVERED">
+		<receiver permission="android.permission.NFC"/>
+	</intent>
+	<intent action="android.intent.action.USER_PRESENT">
+	</intent>
+	<intent action="android.intent.action.USER_INITIALIZE">
+	</intent>
+	<intent action="android.intent.action.USER_FOREGROUND">
+	</intent>
+	<intent action="android.intent.action.USER_BACKGROUND">
+	</intent>
+	<intent action="android.intent.action.SCREEN_ON">
+	</intent>
+	<intent action="android.intent.action.SCREEN_OFF">
+	</intent>
+	<intent action="android.intent.action.SIG_STR">
+	</intent>
+	<intent action="android.provider.Telephony.SMS_REJECTED">
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="com.android.launcher.action.INSTALL_SHORTCUT">
+		<sender permission="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+	</intent>
+	<intent action="com.android.email.ACCOUNT_INTENT">
+		<sender permission="com.android.email.permission.ACCESS_PROVIDER"/>
+	</intent>
+	<intent action="android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.PRELOAD">
+		<sender permission="com.android.browser.permission.PRELOAD"/>
+	</intent>
+	<intent action="android.bluetooth.input.profile.action.CONNECTION_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.UUID">
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.btopp.intent.action.HANDOVER_SEND">
+		<sender permission="com.android.permission.WHITELIST_BLUETOOTH_DEVICE"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.SERVICE_LOCAL_GRANTED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_GRANTED"/>
+	</intent>
+	<intent action="android.intent.action.CALL_EMERGENCY">
+		<sender permission="android.permission.CALL_PRIVILEGED"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.BROADCAST_LOCAL_DENIED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_DENIED"/>
+	</intent>
+	<intent action="android.intent.action.USER_REMOVED">
+		<receiver permission="android.permission.MANAGE_ACCOUNTS"/>
+	</intent>
+	<intent action="android.app.action.DEVICE_ADMIN_ENABLED">
+		<sender permission="android.permission.BIND_DEVICE_ADMIN"/>
+	</intent>
+	<intent action="android.provider.Telephony.SMS_CB_RECEIVED">
+		<sender permission="android.permission.BROADCAST_SMS"/>
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="android.view.InputMethod">
+		<sender permission="android.permission.BIND_INPUT_METHOD"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.ALIAS_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.ACL_DISCONNECTED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.pan.profile.action.CONNECTION_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.accessibilityservice.AccessibilityService">
+		<sender permission="android.permission.BIND_ACCESSIBILITY_SERVICE"/>
+	</intent>
+	<intent action="com.google.android.c2dm.intent.RECEIVE">
+		<sender permission="android.permission.MASTER_CLEAR"/>
+	</intent>
+	<intent action="android.bluetooth.headset.action.VENDOR_SPECIFIC_HEADSET_EVENT">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.BOND_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.SERVICE_LOCAL_DENIED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_DENIED"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.DISAPPEARED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.ACTION_REQUEST_SHUTDOWN">
+		<sender permission="android.permission.SHUTDOWN"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.REQUEST_DISCOVERABLE">
+		<sender permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.btopp.intent.action.STOP_HANDOVER_TRANSFER">
+		<sender permission="com.android.permission.WHITELIST_BLUETOOTH_DEVICE"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.email.POLICY_INTENT">
+		<sender permission="com.android.email.permission.ACCESS_PROVIDER"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.PAIRING_CANCEL">
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.service.wallpaper.WallpaperService">
+		<sender permission="android.permission.BIND_WALLPAPER"/>
+	</intent>
+	<intent action="android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.provider.Telephony.SMS_RECEIVED">
+		<sender permission="android.permission.BROADCAST_SMS"/>
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="android.provider.Telephony.SIM_FULL">
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="android.intent.action.BOOT_COMPLETED">
+		<receiver permission="android.permission.RECEIVE_BOOT_COMPLETED"/>
+	</intent>
+	<intent action="com.android.internal.telephony.IWapPushManager">
+		<sender permission="com.android.smspush.WAPPUSH_MANAGER_BIND"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.CONNECTION_ACCESS_CANCEL">
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+		<sender permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.intent.action.USER_SWITCHED">
+		<receiver permission="android.permission.MANAGE_ACCOUNTS"/>
+	</intent>
+	<intent action="com.android.phone.PERFORM_CDMA_PROVISIONING">
+		<sender permission="android.permission.PERFORM_CDMA_PROVISIONING"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.LOCAL_NAME_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.BROADCAST_REMOTE_DENIED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_DENIED"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.CONNECTION_ACCESS_REPLY">
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.btopp.intent.action.WHITELIST_DEVICE">
+		<sender permission="com.android.permission.WHITELIST_BLUETOOTH_DEVICE"/>
+	</intent>
+	<intent action="com.android.email.EXCHANGE_INTENT">
+		<sender permission="com.android.email.permission.ACCESS_PROVIDER"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.CONNECTION_ACCESS_REQUEST">
+		<sender permission="android.permission.BLUETOOTH_ADMIN"/>
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.CLASS_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.FOUND">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.NEW_OUTGOING_CALL">
+		<receiver permission="android.permission.PROCESS_OUTGOING_CALLS"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.CONNECTION_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.launcher.action.PRELOAD_WORKSPACE">
+		<sender permission="com.android.launcher.permission.PRELOAD_WORKSPACE"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.DISCOVERY_FINISHED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.SET_ALARM">
+		<sender permission="com.android.alarm.permission.SET_ALARM"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.PAIRING_REQUEST">
+		<receiver permission="android.permission.BLUETOOTH_ADMIN"/>
+	</intent>
+	<intent action="android.bluetooth.pbap.intent.action.PBAP_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.app.cts.activity.SERVICE_LOCAL_DENIED">
+		<sender permission="android.app.cts.permission.TEST_DENIED"/>
+	</intent>
+	<intent action="com.android.contacts.VIEW_NOTIFICATION">
+		<sender permission="android.permission.WRITE_CONTACTS"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.REQUEST_ENABLE">
+		<sender permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.USER_ADDED">
+		<receiver permission="android.permission.MANAGE_ACCOUNTS"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.app.cts.activity.SERVICE_LOCAL_GRANTED">
+		<sender permission="android.app.cts.permission.TEST_GRANTED"/>
+	</intent>
+	<intent action="android.intent.action.MASTER_CLEAR">
+		<sender permission="android.permission.MASTER_CLEAR"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.BROADCAST_LOCAL_GRANTED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_GRANTED"/>
+	</intent>
+	<intent action="android.intent.action.REBOOT">
+		<sender permission="android.permission.SHUTDOWN"/>
+	</intent>
+	<intent action="android.provider.Telephony.SMS_SERVICE_CATEGORY_PROGRAM_DATA_RECEIVED">
+		<sender permission="android.permission.BROADCAST_SMS"/>
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="com.android.frameworks.coretests.activity.BROADCAST_REMOTE_GRANTED">
+		<sender permission="com.android.frameworks.coretests.permission.TEST_GRANTED"/>
+	</intent>
+	<intent action="android.bluetooth.a2dp.profile.action.PLAYING_STATE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="android.intent.action.DATA_SMS_RECEIVED">
+		<receiver permission="android.permission.RECEIVE_SMS"/>
+	</intent>
+	<intent action="android.bluetooth.adapter.action.SCAN_MODE_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.mms.intent.action.SENDTO_NO_CONFIRMATION">
+		<sender permission="android.permission.SEND_SMS_NO_CONFIRMATION"/>
+	</intent>
+	<intent action="android.provider.Telephony.WAP_PUSH_RECEIVED">
+		<sender permission="android.permission.BROADCAST_WAP_PUSH"/>
+	</intent>
+	<intent action="android.btopp.intent.action.HANDOVER_SEND_MULTIPLE">
+		<sender permission="com.android.permission.WHITELIST_BLUETOOTH_DEVICE"/>
+	</intent>
+	<intent action="android.provider.Telephony.SMS_EMERGENCY_CB_RECEIVED">
+		<sender permission="android.permission.BROADCAST_SMS"/>
+	</intent>
+	<intent action="android.intent.action.CALL_PRIVILEGED">
+		<sender permission="android.permission.CALL_PRIVILEGED"/>
+	</intent>
+	<intent action="android.intent.action.CALL">
+		<sender permission="android.permission.CALL_PHONE"/>
+	</intent>
+	<intent action="android.intent.action.PHONE_STATE">
+		<receiver permission="android.permission.READ_PHONE_STATE"/>
+	</intent>
+	<intent action="android.bluetooth.device.action.NAME_CHANGED">
+		<receiver permission="android.permission.BLUETOOTH"/>
+	</intent>
+	<intent action="com.android.launcher.action.UNINSTALL_SHORTCUT">
+		<sender permission="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+	</intent>
+	<intent action="android.net.VpnService">
+		<sender permission="android.permission.BIND_VPN_SERVICE"/>
+	</intent>
+	<intent action="android.service.textservice.SpellCheckerService">
+		<sender permission="android.permission.BIND_TEXT_SERVICE"/>
+	</intent>
+</intent-spec>

@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+<!--
+	Auto generated file by org.droidslicer.pscout.PScoutContentProviderUriToXML
+-->
+<provider-spec>
+	<provider authorities="settings" writePermission="android.permission.WRITE_SETTINGS">
+	</provider>
+	<provider authorities="com.android.mms.SuggestionsProvider" readPermission="android.permission.READ_SMS">
+		<path-permission pathPrefix="/search_suggest_shortcut" readPermission="android.permission.GLOBAL_SEARCH"/>
+		<path-permission pathPrefix="/search_suggest_query" readPermission="android.permission.GLOBAL_SEARCH"/>
+	</provider>
+	<provider authorities="com.android.email.attachmentprovider" readPermission="com.android.email.permission.READ_ATTACHMENT">
+	</provider>
+	<provider authorities="com.android.contacts;contacts" readPermission="android.permission.READ_CONTACTS" writePermission="android.permission.WRITE_CONTACTS">
+		<path-permission pathPrefix="/search_suggest_shortcut" readPermission="android.permission.GLOBAL_SEARCH"/>
+		<path-permission pathPrefix="/search_suggest_query" readPermission="android.permission.GLOBAL_SEARCH"/>
+		<path-permission pathPattern="/contacts/.*/photo" readPermission="android.permission.GLOBAL_SEARCH"/>
+	</provider>
+	<provider authorities="downloads">
+		<path-permission pathPrefix="/my_downloads" permission="android.permission.INTERNET"/>
+		<path-permission pathPrefix="/download" permission="android.permission.INTERNET"/>
+		<path-permission pathPrefix="/all_downloads" permission="android.permission.ACCESS_ALL_DOWNLOADS"/>
+	</provider>
+	<provider authorities="ctspermissionwithsignature;ctspermissionwithsignaturegranting" permission="com.android.cts.permissionWithSignature">
+	</provider>
+	<provider authorities="cellbroadcasts" readPermission="android.permission.READ_CELL_BROADCASTS">
+	</provider>
+	<provider authorities="icc" readPermission="android.permission.READ_CONTACTS" writePermission="android.permission.WRITE_CONTACTS">
+	</provider>
+	<provider authorities="com.android.browser;browser" readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS" writePermission="com.android.browser.permission.WRITE_HISTORY_BOOKMARKS">
+		<path-permission path="/bookmarks/search_suggest_query" readPermission="android.permission.GLOBAL_SEARCH"/>
+	</provider>
+	<provider authorities="com.android.browser.home" readPermission="com.android.browser.permission.READ_HISTORY_BOOKMARKS">
+	</provider>
+	<provider authorities="ctspermissionwithsignaturepath" permission="com.android.cts.permissionNotUsedWithSignature">
+		<path-permission pathPrefix="/foo" readPermission="com.android.cts.permissionWithSignature"/>
+		<path-permission pathPrefix="/yes" readPermission="com.android.cts.permissionWithSignature"/>
+	</provider>
+	<provider authorities="com.android.voicemail" permission="com.android.voicemail.permission.ADD_VOICEMAIL">
+	</provider>
+	<provider authorities="com.android.calendar" readPermission="android.permission.READ_CALENDAR" writePermission="android.permission.WRITE_CALENDAR">
+	</provider>
+	<provider authorities="com.android.email.notifier;com.android.email.provider" permission="com.android.email.permission.ACCESS_PROVIDER">
+	</provider>
+	<provider authorities="mms-sms;mms;sms" readPermission="android.permission.READ_SMS" writePermission="android.permission.WRITE_SMS">
+	</provider>
+	<provider authorities="com.android.exchange.directory.provider" readPermission="android.permission.READ_CONTACTS">
+	</provider>
+	<provider authorities="user_dictionary" readPermission="android.permission.READ_USER_DICTIONARY" writePermission="android.permission.WRITE_USER_DICTIONARY">
+	</provider>
+	<provider authorities="ctspermissionwithsignaturepathrestricting">
+		<path-permission pathPrefix="/foo" readPermission="com.android.cts.permissionWithSignature"/>
+		<path-permission pathPrefix="/foo/bar" readPermission="com.android.cts.permissionNormal"/>
+	</provider>
+	<provider authorities="com.android.bluetooth.opp">
+		<path-permission path="/btopp" permission="android.permission.ACCESS_BLUETOOTH_SHARE"/>
+	</provider>
+	<provider authorities="call_log" readPermission="android.permission.READ_CALL_LOG" writePermission="android.permission.WRITE_CALL_LOG">
+	</provider>
+	<provider authorities="com.android.launcher2.settings" readPermission="com.android.launcher.permission.READ_SETTINGS" writePermission="com.android.launcher.permission.WRITE_SETTINGS">
+	</provider>
+	<provider authorities="media">
+		<path-permission pathPrefix="/external/" readPermission="android.permission.READ_EXTERNAL_STORAGE"/>
+		<path-permission pathPrefix="/external/" readPermission="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	</provider>
+</provider-spec>

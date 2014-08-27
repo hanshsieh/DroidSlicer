@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
+    
+	<TextView android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/TextView01" 
+	    android:text="Test connection" />
+	    
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Button01" 
+	    android:text="Use GoogleWeatherAPI via URLConnection" />
+	
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/Button02" 
+	    android:text="Use GoogleWeatherAPI via HttpClient" />	
+	
+	<EditText android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/EditText01" 
+	    android:text="Text" />
+	<ScrollView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/ScrollView01">
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:id="@+id/TextView02" />
+	</ScrollView>
+
+</LinearLayout>

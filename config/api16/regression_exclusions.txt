@@ -1,0 +1,6 @@
+java\/awt\/.*
+javax\/swing\/.*
+sun\/.*
+com\/sun\/.*
+sunw\/.*
+java\/lang\/SystemClassLoaderAction.*

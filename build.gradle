@@ -1,0 +1,137 @@
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'application'
+
+// Start of markdown-gradle-plugin
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'http://dl.bintray.com/content/aalmiray/kordamp' }
+    }
+    dependencies {
+        classpath 'org.kordamp:markdown-gradle-plugin:0.1.1'
+    }
+}
+apply plugin: 'org.kordamp.gradle.markdown'
+// End of markdown-gradle-plugin
+
+mainClassName = 'org.droidslicer.DroidSlicer'
+
+repositories {
+    mavenCentral()
+	maven {
+		url "http://repository-dex2jar.forge.cloudbees.com/release/"
+	}
+}
+eclipse {
+    classpath {
+		downloadSources = true
+		downloadJavadoc = true
+		file.withXml {
+			def node = it.asNode()
+			def children = node.children()
+			children.each {
+				if (it.@path == 'src/main/resources' || it.@path == 'src/test/resources') {
+					it.@excluding = '**'
+				}
+			}
+		}
+    }
+}
+dependencies {
+    compile group: 'com.google.guava', name: 'guava', version: '17.0'
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
+    compile group: 'commons-io', name: 'commons-io', version: '2.4'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.3.2'
+    compile group: 'org.dockingframes', name: 'docking-frames-common', version: '1.1.1'
+    compile group: 'ch.qos.logback', name: 'logback-core', version: '1.0.9'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.0.9'
+	compile group: 'com.googlecode.dex2jar', name: 'dex-reader', version: '1.15'
+	compile group: 'com.googlecode.dex2jar', name: 'dex-ir', version: '1.12'
+	compile('com.googlecode.dex2jar:dex-tools:0.0.9.15'){
+		exclude group: 'com.googlecode.jasmin', module: 'jasmin'
+	}
+	compile group: 'com.googlecode.dex2jar', name: 'dex-translator', version: '0.0.9.15'
+	compile files('libs/wala/wala_core.jar')
+	compile files('libs/wala/wala_cast.jar')
+	compile files('libs/wala/wala_util.jar')
+	compile files('libs/wala/wala_shrike.jar')
+	compile files('libs/org.jgrapht/jgrapht-core-0.9.0.jar')
+	compile files('libs/org.jgrapht/jgrapht-ext-0.9.0.jar')
+	compile files('libs/com.mxgraph.jgraphx/jgraphx-2.4.0.2.jar')
+	compile files('libs/heros/heros-20140609.jar')
+	compile files('libs/android4me.AXMLPrinter2/AXMLPrinter2.jar')
+	compile files('libs/att.grappa/grappa1_2.jar')
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+}
+jar {
+	baseName = "DroidSlicer"
+	version = "0.1.0"
+	def manifestClasspath  = configurations.runtime.files.collect { "libs/" + it.name }
+	manifestClasspath.add('config')
+	manifestClasspath = manifestClasspath .join(' ')
+	manifest.attributes (
+		'Main-Class': mainClassName,
+		'Class-Path': manifestClasspath 
+	)
+}
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
+
+project.ext["exportDir"] = "$buildDir/export"
+
+task exportLibs(type: Copy) {
+	doFirst {
+		println "Exporting libraries"
+	}
+    into "$exportDir/libs"
+    from configurations.runtime
+}
+
+task exportConfig(type: Copy) {
+	doFirst {
+		println "Exporting configuration"
+	}
+	into "$exportDir/config"
+	from "$projectDir/config"
+}
+
+task exportLogback(type: Copy) {
+	doFirst {
+		println "Exporting logback configuration"
+	}
+	into "$exportDir/config/"
+	from "$projectDir/logback.xml"
+}
+
+markdownToHtml {
+	sourceDir = file("doc")
+	outputDir = file("$exportDir/doc")
+}
+
+task exportDoc(dependsOn: 'markdownToHtml') {
+	doFirst {
+		println "Document generated"
+	}
+}
+task exportJar(type: Copy, dependsOn: 'jar') {
+	doFirst {
+		println "Exporting jars"
+	}
+	into "$exportDir"
+	from "$buildDir/libs/${jar.baseName}-${jar.version}.jar"
+}
+
+task export(dependsOn: ['exportJar', 'exportLibs', 'exportConfig', 'exportDoc', 'exportLogback']) {
+	doLast {
+		println "Export finished"
+	}
+}
+
+task exportJavadoc(type: Javadoc) {
+	classpath = configurations.compile
+	source = sourceSets.main.allJava
+	destinationDir = file("$exportDir/doc/apidoc")
+}

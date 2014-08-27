@@ -1,0 +1,1090 @@
+<?xml version="1.0" ?>
+<summary-spec>
+	<class-loader name="Primordial">
+		<package name="android.net">
+			<class name="Uri" allocatable="true">
+			</class>
+		</package>
+		<package name="android.os">
+			<class name="AsyncTask" allocatable="true" >
+				<field name="droidslicer_result" type="java.lang.Object" private="true"/>
+				<method signature="void execute(java.lang.Runnable)" static="true">
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg0" />
+				</method>
+				<method signature="android.os.AsyncTask execute(java.lang.Object[])" static="false">
+					<call class="android.os.AsyncTask" signature="void onPreExecute()" type="virtual" exception="ex0" arg0="arg0" />
+					<call class="android.os.AsyncTask" signature="java.lang.Object doInBackground(java.lang.Object[])" type="virtual" exception="ex1" arg0="arg0" arg1="arg1" def="result" />
+					<putfield ref="arg0" class="android.os.AsyncTask" field="droidslicer_result" fieldType="java.lang.Object" value="result" />
+					<call class="android.os.AsyncTask" signature="void onPostExecute(java.lang.Object)" type="virtual" exception="ex2" arg0="arg0" arg1="result" />
+					<return value="arg0" />
+				</method>
+				<method signature="android.os.AsyncTask executeOnExecutor(java.util.concurrent.Executor, java.lang.Object[])" static="false">
+					<!-- TODO Executor.execute(Runnable) should be invoked -->
+					<call class="android.os.AsyncTask" signature="void onPreExecute()" type="virtual" exception="ex0" arg0="arg0" />
+					<call class="android.os.AsyncTask" signature="java.lang.Object doInBackground(java.lang.Object[])" type="virtual" exception="ex1" arg0="arg0" arg1="arg1" def="result" />
+					<putfield ref="arg0" class="android.os.AsyncTask" field="droidslicer_result" fieldType="java.lang.Object" value="result" />
+					<call class="android.os.AsyncTask" signature="void onPostExecute()" type="virtual" exception="ex2" arg0="arg0" arg1="result" />
+					<return value="arg0" />
+				</method>
+				<method signature="java.lang.Object get(long, java.util.concurrent.TimeUnit)" static="false">
+					<getfield def="result" ref="arg0" class="android.os.AsyncTask" field="droidslicer_result" fieldType="java.lang.Object" />
+					<return value="result" />
+				</method>
+				<method signature="java.lang.Object get()" static="false">
+					<getfield def="result" ref="arg0" class="android.os.AsyncTask" field="droidslicer_result" fieldType="java.lang.Object" />
+					<return value="result" />
+				</method>
+				<method signature="void publishProgress(java.lang.Object[])" static="false">
+					<call class="android.os.AsyncTask" signature="void onProgressUpdate(java.lang.Object[])" type="virtual" exception="ex0" arg0="arg0" arg1="arg1" />
+				</method>
+			</class>
+			<class name="Handler">
+				<method signature="boolean post(java.lang.Runnable)">
+					<constant name="ret" type="boolean" value="true" />
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg1" />
+					<return value="ret" />
+				</method>
+				<method signature="boolean postAtFrontOfQueue(java.lang.Runnable)">
+					<constant name="ret" type="boolean" value="true" />
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg1" />
+					<return value="ret" />
+				</method>
+				<method signature="boolean postAtTime(java.lang.Runnable, java.lang.Object, long)">
+					<constant name="ret" type="boolean" value="true" />
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg1" />
+					<return value="ret" />
+				</method>
+				<method signature="boolean postAtTime(java.lang.Runnable, long)">
+					<constant name="ret" type="boolean" value="true" />
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg1" />
+					<return value="ret" />
+				</method>
+				<method signature="boolean postDelayed(java.lang.Runnable, long)">
+					<constant name="ret" type="boolean" value="true" />
+					<call class="java.lang.Runnable" signature="void run()" type="virtual" exception="ex0" arg0="arg1" />
+					<return value="ret" />
+				</method>
+			</class>
+		</package>
+		<package name="java.util.concurrent">
+			<!-- For methods like Executors.newFixedThreadPool(int), we bypass them by return an instance of 
+			the return type. However, the return type ExecutorService is an interface. Thus, there won't be any callee
+			when methods like ExecutorService.execute(Runnable) are invoked. We have bypassed Executor.execute(Runnable) and 
+			all the classes in the library that implement Executor so that it will invoke Runnable.run() of the parameter.
+			But, for this to work, we should first make the invocation of ExecutorService.execute(Runnable) to have callee. 
+			Thus, we make ExecutorService allocatable so that the invocation of ExecutorService.execute(Runnable) will have callee
+			-->
+			<class name="ExecutorService" allocatable="true" />
+		</package>
+		<package name="java.io">
+			<class name="FileSystem" allocatable="true">
+				<method signature="void &lt;init&gt;()" />
+				<method signature="java.io.FileSystem getFileSystem()" static="true">
+					<new def="x" class="java.io.FileSystem" />
+					<call class="java.io.FileSystem" signature="void &lt;init&gt;()" type="special" exception="ex" arg0="x" />
+					<return value="x" />
+				</method>
+				<method signature="char getSeperator()">
+					<constant name="sep" type="char" value="/" />
+					<return value="sep" />
+				</method>
+				<method signature="char getPathSeparator()">
+					<constant name="sep" type="char" value=":" />
+					<return value="sep" />
+				</method>
+				<method signature="java.lang.String normalize(java.lang.String)">
+					<new def="x" class="java.lang.String" />
+					<call class="java.lang.String" signature="void &lt;init&gt;(java.lang.String)" type="special" exception="ex" arg0="x" arg1="arg1"/>
+					<return value="x" />
+				</method>
+				<method signature="int prefixLength(java.lang.String)">
+					<!-- Incorrect model, just to reflect the dependency -->
+					<call def="len" class="java.lang.String" signature="int length()" type="virtual" exception="ex" arg0="arg1" />
+					<return value="len" />
+				</method>
+				<method signature="java.lang.String resolve(java.lang.String, java.lang.String)">
+					<!-- Simplified model -->
+					<call def="sep" class="java.io.FileSystem" signature="char getSeperator()" type="virtual" exception="ex1" arg0="arg0"/>
+					<new def="builder" class="java.lang.StringBuilder" />
+					<call class="java.lang.StringBuilder" signature="void &lt;init&gt;(java.lang.String)" type="special" exception="ex2" arg0="builder" arg1="arg1"/>
+					<call class="java.lang.StringBuilder" signature="java.lang.StringBuilder append(char)" type="virtual" exception="ex3" arg0="builder" arg1="sep"/>
+					<call class="java.lang.StringBuilder" signature="java.lang.StringBuilder append(java.lang.String)" type="virtual" exception="ex4" arg0="builder" arg1="arg2"/>
+					<call def="result" class="java.lang.StringBuilder" signature="java.lang.String toString()" type="virtual" exception="ex5" arg0="builder" />
+					<return value="result" />
+				</method>
+				<method signature="java.lang.String getDefaultParent()">
+					<constant name="parent" type="char" value="/" />
+					<return value="parent" />
+				</method>
+				<method signature="java.lang.String fromURIPath(java.lang.String)">
+					<!-- Simplified model -->
+					<constant name="start" type="int" value="1" />
+					<call def="result" class="java.lang.String" signature="java.lang.String substring(int)" type="virtual" exception="ex" arg0="arg1" arg1="start"/>
+					<return value="result" />
+				</method>
+				<method signature="boolean isAbsolute(java.io.File)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="java.lang.String resolve(java.io.File)">
+					<!-- Incorrect model -->
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.String canonicalize(java.lang.String)">
+					<!-- Incorrect model -->
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+				</method>
+				<method signature="int getBooleanAttributes(java.io.File)">
+					<!-- Incorrect model -->
+					<constant name="result" type="int" value="0" />
+					<return value="result" />
+				</method>
+				<method signature="boolean checkAccess(java.io.File, int)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="boolean setPermission(java.io.File, int, boolean, boolean)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="long getLastModifiedTime(java.io.File)">
+					<constant name="result" type="long" value="0" />
+					<return value="result" />
+				</method>
+				<method signature="long getLength(java.io.File)">
+					<constant name="len" type="long" value="0" />
+					<return value="len" />
+				</method>
+				<method signature="boolean createFileExclusively(java.lang.String)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="boolean delete(java.io.File)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="java.lang.String[] list(java.io.File)">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="result"
+						class="java.lang.String[]" size="size"/>
+					<new def="ele" class="java.lang.String" />
+					<aastore ref="result" value="ele" index="index" eleType="java.lang.String" />
+					<return value="result" />
+				</method>
+				<method signature="boolean createDirectory(java.io.File)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="boolean rename(java.io.File, java.io.File)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="boolean setLastModifiedTime(java.io.File, long)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="boolean setReadOnly(java.io.File)">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+				<method signature="java.io.File[] listRoots()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="result"
+						class="java.io.File[]" size="size"/>
+					<new def="ele" class="java.io.File" />
+					<aastore ref="result" value="ele" index="index" eleType="java.io.File" />
+					<return value="result" />
+				</method>
+				<method signature="long getSpace(java.io.File, int)">
+					<constant name="result" type="long" value="0" />
+					<return value="result" />
+				</method>
+				<method signature="int compare(java.io.File, java.io.File)">
+					<constant name="result" type="int" value="0" />
+					<return value="result" />
+				</method>
+				<method signature="int hashCode(java.io.File)">
+					<constant name="result" type="int" value="0" />
+					<return value="result" />
+				</method>
+			</class>
+			<class name="FileInputStream">
+				<method signature="int available()">
+					<constant name="yes" type="int" value="1" />
+					<constant name="no" type="int" value="0" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void close()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void open(java.lang.String)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="int read0()">
+					<constant name="yes" type="int" value="1" />
+					<constant name="no" type="int" value="0" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="int readBytes(byte[], int, int)">
+					<constant name="yes" type="int" value="1" />
+					<constant name="no" type="int" value="0" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="long skip(long)">
+					<constant name="yes" type="int" value="1" />
+					<constant name="no" type="int" value="0" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+			</class>
+			
+			<!-- To avoid the complication during analysis, we bypass the encoding conversion -->
+			<class name="OutputStreamWriter">
+				<field name="droidslicer_out" type="java.io.OutputStream" private="true"/>
+				<method signature="void &lt;init&gt;(java.io.OutputStream)">
+					<putfield ref="arg0" class="java.io.OutputStreamWriter" field="droidslicer_out" fieldType="java.io.OutputStream" value="arg1" />
+				</method>
+				<method signature="void &lt;init&gt;(java.io.OutputStream, java.lang.String)">
+					<call class="java.io.OutputStream" signature="void &lt;init&gt;(java.io.OutputStream)" type="special" exception="ex" arg0="arg0" arg1="arg1"/>
+				</method>
+				<method signature="void &lt;init&gt;(java.io.OutputStream, java.nio.charset.Charset)">
+					<call class="java.io.OutputStream" signature="void &lt;init&gt;(java.io.OutputStream)" type="special" exception="ex" arg0="arg0" arg1="arg1"/>
+				</method>
+				<method signature="void &lt;init&gt;(java.io.OutputStream, java.nio.charset.CharsetEncoder)">
+					<call class="java.io.OutputStream" signature="void &lt;init&gt;(java.io.OutputStream)" type="special" exception="ex" arg0="arg0" arg1="arg1"/>
+				</method>
+				<method signature="void write(int)">
+					<getfield def="out" ref="arg0" class="java.io.OutputStreamWriter" field="droidslicer_out" fieldType="java.io.OutputStream" />
+					<call class="java.io.OutputStream" signature="void write(int)" type="virtual" exception="ex" arg0="out" arg1="arg1"/>
+					<throw value="ex" />
+				</method>
+				<method signature="void write(char[], int, int)">
+					<getfield def="out" ref="arg0" class="java.io.OutputStreamWriter" field="droidslicer_out" fieldType="java.io.OutputStream" />
+					<!-- The type doesn't match. Is it safe? -->
+					<call class="java.io.OutputStream" signature="void write(byte[], int, int)" type="virtual" exception="ex" 
+						arg0="out" arg1="arg1" arg2="arg2" arg3="arg3"/>
+					<throw value="ex" />
+				</method>
+				<method signature="void write(java.lang.String, int, int)">
+					<getfield def="out" ref="arg0" class="java.io.OutputStreamWriter" field="droidslicer_out" fieldType="java.io.OutputStream" />
+					<call def="bytes" class="java.lang.String" signature="byte[] getBytes()" type="virtual" exception="ignore1" 
+						arg0="arg1"/>
+					<call class="java.io.OutputStream" signature="void write(byte[], int, int)" type="virtual" exception="ex" 
+						arg0="out" arg1="bytes" arg2="arg2" arg3="arg3"/>
+					<throw value="ex" />
+				</method>
+				<method signature="void flush()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="java.lang.String getEncoding()">
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+				</method>
+				<method signature="void flushBuffer()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void close()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+			</class>
+			<class name="FileOutputStream">
+				<method signature="void close()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void open(java.lang.String, boolean)">
+					<new def="x" class="java.io.FileNotFoundException" />
+					<throw value="x" />
+				</method>
+				<method signature="void write(int, boolean)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void writeBytes(byte[], int, int, boolean)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+			</class>
+			<class name="ObjectOutputStream">
+				<method signature="void doublesToBytes(double[], int, byte[], int, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="double" />
+					<aastore ref="arg2" index="arg3" eleType="double" value="x" />
+				</method>
+				<method signature="void floatsToBytes(float[], int, byte[], int, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="float" />
+					<aastore ref="arg2" index="arg3" eleType="float" value="x" />
+				</method>
+			</class>
+			<class name="ObjectStreamClass">
+				<method signature="boolean hasStaticInitializer(java.lang.Class)" static="true">
+					<constant name="yes" type="boolean" value="true" />
+					<constant name="no" type="boolean" value="false" />
+					<return value="yes" />
+					<return value="no" />
+				</method>
+			</class>
+			<class name="RandomAccessFile">
+				<method signature="void close()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="long getFilePointer()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="long length()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void open(java.lang.String, int)">
+					<new def="x" class="java.io.FileNotFoundException" />
+					<throw value="x" />
+				</method>
+				<method signature="int read0()">
+					<constant name="yes" type="int" value="1" />
+					<constant name="no" type="int" value="0" />
+					<return value="yes" />
+					<return value="no" />
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="int read()">
+					<call class="java.io.RandomAccessFile" signature="int read0()" type="virtual" exception="ex" arg0="arg0" def="result" />
+					<return value="result" />
+				</method>
+				<method signature="int readBytes0(byte[], int, int)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void seek(long)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void write0()">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void writeBytes0(byte[], int, int)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+				<method signature="void writeBytes(byte[], int, int)">
+					<call class="java.io.RandomAccessFile" signature="void writeBytes0(byte[], int, int)" 
+						type="virtual" exception="ex" arg0="arg0" arg1="arg1" arg2="arg2" arg3="arg3" />
+				</method>
+			</class>
+		</package>
+
+		<package name="java.lang" ignore="true">
+			<class name="Class">
+				<method signature="java.lang.Class forName(java.lang.String)"
+					static="true">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+					<new def="y"
+						class="java.lang.ClassNotFoundException" />
+					<throw value="y" />
+					<new def="z" class="java.lang.ClassFormatError" />
+					<throw value="z" />
+				</method>
+				<method signature="java.lang.Class forName0(java.lang.String, boolean, java.lang.ClassLoader)"
+					static="true">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+					<new def="y"
+						class="java.lang.ClassNotFoundException" />
+					<throw value="y" />
+					<new def="z" class="java.lang.ClassFormatError" />
+					<throw value="z" />
+				</method>
+				<method signature="java.lang.ClassLoader getClassLoader0()">
+					<new def="x" class="java.lang.ClassLoader" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Class getComponentType()">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.reflect.Constructor getConstructor0(java.lang.Class[], int)">
+					<new def="x" class="java.lang.reflect.Constructor" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Class[] getInterfaces()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x" class="java.lang.Class[]" size="size" />
+					<new def="y" class="java.lang.Class" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.Class"/>
+					<return value="x" />
+				</method>
+				<method signature="java.lang.reflect.Method getMethod0(java.lang.String, java.lang.Class[])">
+					<new def="x" class="java.lang.reflect.Method" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.reflect.Method[] getMethods()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x" class="java.lang.reflect.Method[]"
+						size="size" />
+					<new def="y" class="java.lang.reflect.Method" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.reflect.Method"/>
+					<return value="x" />
+				</method>
+				<method signature="int getModifiers()">
+					<constant name="mod" type="int" value="1" />
+					<return value="mod" />
+				</method>
+				<method signature="java.lang.String getName()">
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Class getPrimitiveClass(java.lang.String)" static="true">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Object[] getSigners()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x" class="java.lang.Object[]" size="size" />
+					<new def="y" class="java.lang.Class" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.Object" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Class getSuperclass()">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.reflect.Field[] getFields()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x" class="java.lang.reflect.Field[]" size="size"/>
+					<new def="y" class="java.lang.reflect.Field" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.reflect.Field" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.reflect.Constructor[] getConstructors()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x"
+						class="java.lang.reflect.Constructor[]" size="size"/>
+					<new def="y" class="java.lang.reflect.Constructor" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.reflect.Constructor" />
+					<return value="x" />
+				</method>
+			</class>
+			<class name="ClassLoader" allocatable="true">
+				<method signature="java.lang.Class findBootstrapClass(java.lang.String)">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Class findLoadedClass(java.lang.String)">
+					<call type="static" signature="java.lang.Class forName(java.lang.String)"
+						class="java.lang.Class"
+						arg0="arg1" def="x" exception="ex"/>
+					<return value="x" />
+				</method>
+			</class>
+			<class name="Double">
+				<method signature="long doubleToLongBits(double)"
+					static="true">
+					<return value="arg0" />
+				</method>
+				<method signature="double longBitsToDouble(long)"
+					static="true">
+					<return value="arg0" />
+				</method>
+			</class>
+			<class name="Float">
+				<method signature="int floatToIntBits(float)"
+					static="true">
+					<return value="arg0" />
+				</method>
+				<method signature="float intBitsToFloat(int)"
+					static="true">
+					<return value="arg0" />
+				</method>
+			</class>
+			<class name="Object">
+				<method signature="java.lang.Object clone()">
+					<new def="x" class="java.lang.Object" />
+					<return value="x" />
+					<!-- Note that propagation-style builders should intercept calls to clone, and this model is OK for RTA -->
+				</method>
+				<method signature="java.lang.Class getClass()">
+					<new def="x" class="java.lang.Class" />
+					<return value="x" />
+				</method>
+			</class>
+			<class name="SecurityManager">
+				<method signature="java.lang.Class[] getClassContext()">
+					<constant name="size" type="int" value="1" />
+					<constant name="index" type="int" value="0" />
+					<new def="x" class="java.lang.Class[]" size="size"/>
+					<new def="y" class="java.lang.Class" />
+					<aastore ref="x" value="y" index="index" eleType="java.lang.Class"/>
+					<return value="x" />
+				</method>
+			</class>
+			<class name="StrictMath">
+				<method signature="double ceil(double)" static="true">
+					<return value="arg0" />
+				</method>
+				<method signature="double exp(double)" static="true">
+					<return value="arg0" />
+				</method>
+				<method signature="double floor(double)" static="true">
+					<return value="arg0" />
+				</method>
+				<method signature="double pow(double, double)" static="true">
+					<return value="arg0" />
+				</method>
+			</class>
+			<class name="String">
+				<method signature="java.lang.String intern(java.lang.String)">
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+					<poison
+						reason="questionable model of java/lang/String/intern()"
+						level="mild" />
+				</method>
+			</class>
+			<class name="System">
+				<method signature="void &lt;clinit&gt;()" static="true">
+				</method>
+				<method signature="void arraycopy(java.lang.Object, int, java.lang.Object, int, int)"
+					static="true">
+					<call type="static" signature="void arraycopy(java.lang.Object, java.lang.Object)"
+						class="com.ibm.wala.model.java.lang.System" arg0="arg0"
+						arg1="arg2" exception="ex"/>
+					<return />
+				</method>
+				<method signature="java.util.Properties initProperties(java.util.Properties)"
+					static="true">
+					<new def="dummy1" class="java.lang.Object" />
+					<new def="dummy2" class="java.lang.Object" />
+					<call type="virtual" signature="java.lang.Object put(java.lang.Object, java.lang.Object)"
+						class="java.util.Properties"
+						arg0="arg0" arg1="dummy1" arg2="dummy2" def="ignore" exception="ex"/>
+					<new def="x" class="java.util.Properties" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.String getProperty(java.lang.String)"
+				    static="true">
+				    <new def="x" class="java.lang.String" />
+				    <return value="x" />
+				</method>
+				<method signature="java.lang.String getProperty(java.lang.String, java.lang.String)"
+				    static="true">
+				    <return value="arg1" />
+				    <new def="x" class="java.lang.String" />
+				    <return value="x" />
+				</method>
+				<method signature="java.lang.String mapLibraryName(java.lang.String)"
+					static="true">
+					<return value="arg0" />
+				</method>
+			</class>
+			<class name="Thread">
+				<field name="droidslicer_runnable" type="java.lang.Runnable" private="true"/>
+				<method signature="java.lang.Thread currentThread()" static="true">
+					<new def="x" class="java.lang.Thread" />
+					<return value="x" />
+				</method>
+				<method signature="void &lt;init&gt;()">
+					<putfield class="java.lang.Thread" field="droidslicer_runnable"
+						fieldType="java.lang.Runnable" ref="arg0" value="null" />
+				</method>
+				<method signature="void &lt;init&gt;(java.lang.Runnable)">
+					<putfield class="java.lang.Thread" field="droidslicer_runnable"
+						fieldType="java.lang.Runnable" ref="arg0" value="arg1" />
+				</method>
+				<method signature="void sleep(long)" static="true">
+					<new def="x"
+						class="java.lang.InterruptedException" />
+					<throw value="x" />
+				</method>
+				<method signature="void start()">
+					<call type="virtual" signature="void run()"
+						class="java.lang.Thread" arg0="arg0" exception="ex"/>
+				</method>
+				<method signature="void run()">
+					<getfield def="runnable" ref="arg0" class="java.lang.Thread" field="droidslicer_runnable" fieldType="java.lang.Runnable" />
+					<call type="virtual" signature="void run()"
+						class="java.lang.Runnable" arg0="runnable" exception="ex"/>
+				</method>
+			</class>
+			<class name="Throwable">
+				<method signature="java.lang.Throwable fillInStackTrace()">
+					<return value="arg0" />
+				</method>
+			</class>
+		</package>
+		<package name="java.lang.reflect">
+			<class name="Array">
+				<method signature="java.lang.Object get(java.lang.Object, int)" static="true">
+					<call type="static" signature="java.lang.Object get(java.lang.Object, int)"
+						class="com.ibm.wala.model.java.lang.reflect.Array" arg0="arg0"
+						arg1="arg1" def="x" exception="ex"/>
+					<return value="x" />
+				</method>
+				<method signature="boolean getBoolean(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="boolean" />
+					<return value="x" />
+				</method>
+				<method signature="byte getByte(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="byte" />
+					<return value="x" />
+				</method>
+				<method signature="char getChar(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="char" />
+					<return value="x" />
+				</method>
+				<method signature="short getShort(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="short" />
+					<return value="x" />
+				</method>
+				<method signature="int getInt(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="int" />
+					<return value="x" />
+				</method>
+				<method signature="long getLong(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="long" />
+					<return value="x" />
+				</method>
+				<method signature="float getFloat(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="float" />
+					<return value="x" />
+				</method>
+				<method signature="double getDouble(java.lang.Object, int)" static="true">
+					<aaload def="x" ref="arg0" index="arg1" eleType="double" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Object multiNewArray(java.lang.Class, int[])" static="true"
+					factory="true">
+					<new def="x" class="java.lang.Object" />
+					<return value="x" />
+				</method>
+				<!-- THIS KIND OF TREATMENT OF ARRAYS IS BOGUS and TOO IMPRECISE.  TODO: FIX THIS. -->
+				<method signature="java.lang.Object newArray(java.lang.Class, int)" static="true"
+					factory="true">
+					<new def="x" class="java.lang.Object" />
+					<return value="x" />
+				</method>
+				<method signature="java.lang.Object newInstance(java.lang.Object, int)" static="true">
+					<call type="static" signature="java.lang.Object newArray(java.lang.Class, int)"
+						class="java.lang.reflect.Array" arg0="arg0"
+						arg1="arg1" def="x" exception="ex"/>
+					<return value="x" />
+				</method>
+				<!-- Maybe we should write a helper class to implement it more precisely -->
+				<method signature="void set(java.lang.Object, int, java.lang.Object)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="java.lang.Object" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setBoolean(java.lang.Object, int, boolean)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="boolean" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setByte(java.lang.Object, int, byte)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="byte" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setChar(java.lang.Object, int, char)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="char" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setShort(java.lang.Object, int, short)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="short" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setInt(java.lang.Object, int, int)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="int" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setLong(java.lang.Object, int, long)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="long" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setFloat(java.lang.Object, int, float)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="float" value="arg2" />
+					<return />
+				</method>
+				<method signature="void setDouble(java.lang.Object, int, double)" static="true">
+					<aastore ref="arg0" index="arg1" eleType="double" value="arg2" />
+					<return />
+				</method>
+			</class>
+			<class name="Constructor">
+			    <method signature="java.lang.Object newInstance(java.lang.Object[])" factory="true">
+					<new def="x" class="java.lang.Object" />
+					<return value="x" />
+				</method>
+		    </class>
+			<class name="Field">
+				<method signature="java.lang.Object get(java.lang.Object)" factory="true">
+					<new def="x" class="java.lang.Object" />
+					<return value="x" />
+					<poison
+						reason="bogus model of java/lang/reflect/Field/get"
+						level="severe" />
+				</method>
+			</class>
+		</package>
+
+		<package name="java.net">
+			<class name="SocketInputStream">
+				<method signature="void init()" static="true" />
+				<method signature="int socketRead0(java.io.FileDescriptor, byte[], int, int, int)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+			</class>
+			<class name="SocketOutputStream">
+				<method signature="void init()" static="true" />
+				<method signature="void socketWrite0(java.io.FileDescriptor, byte[], int, int)">
+					<new def="x" class="java.io.IOException" />
+					<throw value="x" />
+				</method>
+			</class>
+			<class name="URL">
+				<method signature="java.net.URLConnection openConnection()">
+					<new def="httpconn" class="java.net.HttpURLConnection" />
+					<return value="httpconn" />
+					
+					<new def="httpsconn" class="javax.net.ssl.HttpsURLConnection" />
+					<return value="httpsconn" />
+					
+					<new def="jarconn" class="java.net.JarURLConnection" />
+					<return value="jarconn" />
+					
+					<new def="urlconn" class="java.net.URLConnection" />
+					<return value="urlconn" />
+				</method>
+				<method signature="java.net.URLConnection openConnection(java.net.Proxy)" factory="true">
+					<new def="httpconn" class="java.net.HttpURLConnection" />
+					<return value="httpconn" />
+					
+					<new def="httpsconn" class="javax.net.ssl.HttpsURLConnection" />
+					<return value="httpsconn" />
+					
+					<new def="jarconn" class="java.net.JarURLConnection" />
+					<return value="jarconn" />
+					
+					<new def="urlconn" class="java.net.URLConnection" />
+					<return value="urlconn" />
+				</method>
+			</class>
+		</package>
+
+		<package name="java.security">
+			<class name="AccessController">
+				<method signature="java.security.AccessControlContext getInheritedAccessControlContext()" >
+					<new def="x" class="java.security.AccessControlContext" />
+					<return value="x" />
+					<poison
+						reason="questionable model of java/security/AccessControlContext/getInheritedAccessControlContext"
+						level="moderate" />
+				</method>
+				<method signature="java.lang.Object doPrivileged(java.security.PrivilegedAction)" static="true">
+					<call type="interface" signature="java.lang.Object run()"
+						class="java.security.PrivilegedAction" def="x" arg0="arg0" exception="ex"/>
+					<return value="x" />
+					<new def="y"
+						class="java.security.PrivilegedActionException" />
+					<throw value="y" />
+					<poison
+						reason="incorrect model of java/security/AccessController/doPrivileged"
+						level="severe" />
+				</method>
+				<method signature="java.lang.Object doPrivileged(java.security.PrivilegedExceptionAction)" static="true">
+					<call type="interface" signature="java.lang.Object run()"
+						class="java.security.PrivilegedExceptionAction" def="x" arg0="arg0" exception="ex" />
+					<return value="x" />
+					<new def="y"
+						class="java.security.PrivilegedActionException" />
+					<throw value="y" />
+					<poison
+						reason="incorrect model of java/security/AccessController/doPrivileged"
+						level="severe" />
+				</method>
+				<method signature="java.lang.Object doPrivileged(java.security.PrivilegedAction, java.security.AccessControlContext)"
+					static="true">
+					<call type="interface" signature="java.lang.Object run()"
+						class="java.security.PrivilegedAction" def="x" arg0="arg0" exception="ex"/>
+					<return value="x" />
+					<new def="y"
+						class="java.security.PrivilegedActionException" />
+					<throw value="y" />
+					<poison
+						reason="incorrect model of java/security/AccessController/doPrivileged"
+						level="severe" />
+				</method>
+				<method signature="java.lang.Object doPrivileged(java.security.PrivilegedExceptionAction, java.security.AccessControlContext)"
+					static="true">
+					<call type="interface" signature="java.lang.Object run()"
+						class="java.security.PrivilegedExceptionAction" def="x" arg0="arg0" exception="ex"/>
+					<return value="x" />
+					<new def="y"
+						class="java.security.PrivilegedActionException" />
+					<throw value="y" />
+					<poison
+						reason="incorrect model of java/security/AccessController/doPrivileged"
+						level="severe" />
+				</method>
+				<method signature="java.security.AccessControlContext getStackAccessControlContext()"
+					static="true">
+					<new def="x"
+						class="java.security.AccessControlContext" />
+					<return value="x" />
+					<poison
+						reason="questionable model of java/security/AccessController/getStackAccessControlContext"
+						level="moderate" />
+				</method>
+			</class>
+		</package>
+
+		<package name="java.util" ignore="true">
+			<class name="TimeZone">
+				<method signature="java.lang.String getSystemTimeZoneID(java.lang.String, java.lang.String)" static="true">
+					<new def="x" class="java.lang.String" />
+					<return value="x" />
+				</method>
+			</class>
+			<class name="Timer">
+				<method signature="void schedule(java.util.TimerTask, java.util.Date, long)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+				<method signature="void schedule(java.util.TimerTask, long, long)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+				<method signature="void schedule(java.util.TimerTask, java.util.Date)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+				<method signature="void schedule(java.util.TimerTask, long)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+				<method signature="void scheduleAtFixedRate(java.util.TimerTask, long, long)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+				<method signature="void scheduleAtFixedRate(java.util.TimerTask, java.util.Date, long)" static="false">
+					<call class="java.util.TimerTask" 
+						signature="void run()"
+						type="virtual"
+						arg0="arg1"
+						exception="ex0"/>
+				</method>
+			</class>
+			<!-- We need the definition of ArrayList to make our Android app model work -->
+			<class name="ArrayList" ignore="false">
+			</class>
+		</package>
+
+		<package name="android.database.sqlite" ignore="true">
+			<class name="SQLiteDatabase">
+				<method signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int)" static="true">
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int, android.database.DatabaseErrorHandler)"
+						type="static"
+						def="db" arg0="arg0" arg1="arg1" arg2="arg2" arg3="null" exception="ex0"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int, android.database.DatabaseErrorHandler)" static="true">
+					<new def="db" class="android.database.sqlite.SQLiteDatabase" />
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="void &lt;init&gt;(java.lang.String, int, android.database.sqlite.SQLiteDatabase$CursorFactory, android.database.DatabaseErrorHandler)" 
+						type="special" 
+						arg0="db"
+						arg1="arg0"
+						arg2="arg2"
+						arg3="arg1"
+						arg4="arg3"
+						exception="ex0"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.io.File, android.database.sqlite.SQLiteDatabase$CursorFactory)" static="true">
+					<call class="java.io.File" 
+						signature="java.lang.String getPath()"
+						type="virtual" 
+						def="path" arg0="arg0" exception="ex0"/>
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory)"
+						type="static"
+						def="db" arg0="path" arg1="arg1" exception="ex1"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory)" static="true">
+					<getstatic def="CREATE_IF_NECESSARY" class="android.database.sqlite.SQLiteDatabase" field="CREATE_IF_NECESSARY" fieldType="int" />
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int, android.database.DatabaseErrorHandler)"
+						type="static"
+						def="db" arg0="arg0" arg1="arg1" arg2="CREATE_IF_NECESSARY" arg3="null" exception="ex0"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase openOrCreateDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, android.database.DatabaseErrorHandler)" static="true">
+					<getstatic def="CREATE_IF_NECESSARY" class="android.database.sqlite.SQLiteDatabase" field="CREATE_IF_NECESSARY" fieldType="int" />
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int, android.database.DatabaseErrorHandler)"
+						type="static"
+						def="db" arg0="arg0" arg1="arg1" arg2="CREATE_IF_NECESSARY" arg3="arg2" exception="ex0"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase create(android.database.sqlite.SQLiteDatabase$CursorFactory)" static="true">
+					<!-- In the original code, MEMORY_DB_PATH is from SQLiteDatabaseConfiguration.MEMORY_DB_PATH, however,
+					SQLiteDatabaseConfiguration is a hidden class. To prevent portability problem, we decide to hard-code the value 
+					here. -->
+					<constant name="MEMORY_DB_PATH" type="string" value=":memory:" />
+					<getstatic def="CREATE_IF_NECESSARY" class="android.database.sqlite.SQLiteDatabase" field="CREATE_IF_NECESSARY" fieldType="int" />
+					<call class="android.database.sqlite.SQLiteDatabase" 
+						signature="android.database.sqlite.SQLiteDatabase openDatabase(java.lang.String, android.database.sqlite.SQLiteDatabase$CursorFactory, int)"
+						type="static"
+						def="db" arg0="MEMORY_DB_PATH" arg1="arg0" arg2="CREATE_IF_NECESSARY" exception="ex0"/>
+					<return value="db" />
+				</method>
+			</class>
+			<class name="SQLiteOpenHelper">
+				<method signature="android.database.sqlite.SQLiteDatabase getWritableDatabase()">
+					<!-- <new def="db" class="android.database.sqlite.SQLiteDatabase" />-->
+					<constant name="oldVer" type="int" value="0" />
+					<constant name="newVer" type="int" value="0" />
+					<call type="special" signature="android.database.sqlite.SQLiteDatabase getWritableDatabase()"
+						class="android.database.sqlite.SQLiteOpenHelper" def="db" arg0="arg0" exception="ex0"/>
+					<call type="virtual" signature="void onCreate(android.database.sqlite.SQLiteDatabase)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" exception="ex1"/>
+					<call type="virtual" signature="void onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" arg2="oldVer" arg3="newVer" exception="ex2"/>
+					<call type="virtual" signature="void onOpen(android.database.sqlite.SQLiteDatabase)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" exception="ex3"/>
+					<return value="db" />
+				</method>
+				<method signature="android.database.sqlite.SQLiteDatabase getReadableDatabase()">
+					<!--<new def="db" class="android.database.sqlite.SQLiteDatabase" />-->
+					<constant name="oldVer" type="int" value="0" />
+					<constant name="newVer" type="int" value="0" />
+					<call type="special" signature="android.database.sqlite.SQLiteDatabase getReadableDatabase()"
+						class="android.database.sqlite.SQLiteOpenHelper" def="db" arg0="arg0" exception="ex0"/>
+					<call type="virtual" signature="void onCreate(android.database.sqlite.SQLiteDatabase)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" exception="ex1"/>
+					<call type="virtual" signature="void onUpgrade(android.database.sqlite.SQLiteDatabase, int, int)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" arg2="oldVer" arg3="newVer" exception="ex2"/>
+					<call type="virtual" signature="void onOpen(android.database.sqlite.SQLiteDatabase)"
+						class="android.database.sqlite.SQLiteOpenHelper" arg0="arg0" arg1="db" exception="ex3"/>
+					<return value="db" />
+				</method>
+			</class>
+		</package>
+		<package name="android.util" ignore="true">
+			<class name="Log" ignore="true" />
+			<class name="LogPrinter" ignore="true" />
+			<class name="Base64" ignore="true" />
+		</package>
+		<package name="android.app" ignore="true">
+			<class name="Activity">
+				<method signature="android.view.View findViewById(int)" factory="true">
+					<new def="ret" class="android.view.View" />
+					<return value="ret" />
+				</method>
+			</class>
+		</package>
+		<package name="org.apache.http.impl.client">
+			<class name="AbstractHttpClient">
+				<method signature="java.lang.Object execute(org.apache.http.client.methods.HttpUriRequest, org.apache.http.client.ResponseHandler, org.apache.http.protocol.HttpContext)" >
+					<new def="response" class="org.apache.http.message.BasicHttpResponse" />
+					<call type="interface" signature="java.lang.Object handleResponse(org.apache.http.HttpResponse)"
+						class="org.apache.http.client.ResponseHandler" arg0="arg2" arg1="response" def="result" exception="ex1"/>
+					<return value="result" />
+				</method>
+				<method signature="java.lang.Object execute(org.apache.http.HttpHost, org.apache.http.HttpRequest, org.apache.http.client.ResponseHandler)">
+					<new def="response" class="org.apache.http.message.BasicHttpResponse" />
+					<call type="interface" signature="java.lang.Object handleResponse(org.apache.http.HttpResponse)"
+						class="org.apache.http.client.ResponseHandler" arg0="arg3" arg1="response" def="result" exception="ex1"/>
+					<return value="result" />
+				</method>
+				<method signature="java.lang.Object execute(org.apache.http.HttpHost, org.apache.http.HttpRequest, org.apache.http.client.ResponseHandler, org.apache.http.protocol.HttpContext)">
+					<new def="response" class="org.apache.http.message.BasicHttpResponse" />
+					<call type="interface" signature="java.lang.Object handleResponse(org.apache.http.HttpResponse)"
+						class="org.apache.http.client.ResponseHandler" arg0="arg3" arg1="response" def="result" exception="ex1"/>
+					<return value="result" />
+				</method>
+				<method signature="java.lang.Object execute(org.apache.http.client.methods.HttpUriRequest, org.apache.http.client.ResponseHandler)">
+					<new def="response" class="org.apache.http.message.BasicHttpResponse" />
+					<call type="interface" signature="java.lang.Object handleResponse(org.apache.http.HttpResponse)"
+						class="org.apache.http.client.ResponseHandler" arg0="arg2" arg1="response" def="result" exception="ex1"/>
+					<return value="result" />
+				</method>
+			</class>
+		</package>
+		<package name="android.view">
+			<!-- android.app.Activity extends ContextThemeWrapper, and ContextThemeWrapper overwrite 
+			attachBaseContext(Context), which will affect app model, thus we mustn't ignore the method definition of this class -->
+			<class name="ContextThemeWrapper" ignore="false" />
+			<class name="SurfaceHolder" allocatable="true"/>
+			<class name="SurfaceView" allocatable="true">
+				<method signature="android.view.SurfaceHolder getHolder()" factory="true">
+					<new def="x" class="android.view.SurfaceHolder" />
+					<return value="x" />
+				</method>
+			</class>
+		</package>
+	</class-loader>
+</summary-spec>
+

@@ -1,0 +1,29 @@
+<configuration>
+  <appender name="STDOUT"
+    class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}:%L - %msg%n
+     </pattern>
+    </encoder>
+  </appender>
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %logger{36}:%L - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+
+  <!-- <logger name="com.ibm.wala" level="WARN"/> -->
+
+  <root level="INFO">
+    <appender-ref ref="STDOUT" />
+    <appender-ref ref="FILE" />
+  </root>
+  <logger name="heros" level="WARN" />
+  <logger name="org.droidslicer.signature.BehaviorSignaturesTester" level="DEBUG" />
+  <!-- <logger name="org.droidslicer.signature.BehaviorSupergraph" level="DEBUG" />
+  <logger name="org.droidslicer.signature.SensitiveFlowProblem" level="DEBUG" />
+  <logger name="org.droidslicer.slice.IFDSSolver" level="INFO" />  -->
+</configuration>

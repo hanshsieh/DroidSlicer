@@ -1,0 +1,8 @@
+*.dot
+log
+units_info.txt
+.settings
+.gradle
+bin/
+build/
+tmp
