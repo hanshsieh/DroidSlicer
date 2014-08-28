@@ -91,6 +91,7 @@ import com.ibm.wala.types.ClassLoaderReference;
 import com.ibm.wala.types.MethodReference;
 import com.ibm.wala.types.TypeReference;
 import com.ibm.wala.util.CancelException;
+import com.ibm.wala.util.config.FileOfClasses;
 import com.ibm.wala.util.strings.Atom;
 import com.ibm.wala.util.warnings.Warning;
 import com.ibm.wala.util.warnings.Warnings;
@@ -399,7 +400,7 @@ public class AndroidAnalysisContext
 		dataLoader.loadSystemLibraries(analysisScope);
 		analysisScope.addToScope(ClassLoaderReference.Primordial, new JarFile(dataLoader.getAndroidMethodSummaryHelper()));
 		analysisScope.addToScope(analysisScope.getApplicationLoader(), appModule);
-		//analysisScope.setExclusions(FileOfClasses.createFileOfClasses(dataLoader.getAndroidExlucsions()));
+		analysisScope.setExclusions(FileOfClasses.createFileOfClasses(dataLoader.getAndroidExlusions()));
 		return analysisScope;
 	}
 	protected static IClassHierarchy makeClassHierarchy(AnalysisScope analysisScope, XMLBypassSummaryReader methodSummary)

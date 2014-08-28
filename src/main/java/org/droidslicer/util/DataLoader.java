@@ -119,7 +119,7 @@ public class DataLoader
 		return mAndroidMethodSummary;
 	}
 	
-	public File getAndroidExlucsions()
+	public File getAndroidExlusions()
 	{
 		return mAndroidExclusions;
 	}

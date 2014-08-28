@@ -6,3 +6,4 @@ units_info.txt
 bin/
 build/
 tmp
+.classpath
