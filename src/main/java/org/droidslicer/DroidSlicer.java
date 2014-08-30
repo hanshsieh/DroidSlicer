@@ -78,7 +78,6 @@ public class DroidSlicer extends JFrame
 	private static final String APP_PATH = "app";
 	protected final JMenuBar mMenuBar = new JMenuBar();
 	protected final LoggingPane mLoggingPane = new LoggingPane();
-	//private final JScrollPane mGraphPane = new JScrollPane();
 	protected final GraphPane mGraphPane = new GraphPane();
 	protected final PropertiesPane mPropertiesPane;
 	private AndroidAnalysisContext mAnalysisCtx = null;
@@ -87,7 +86,7 @@ public class DroidSlicer extends JFrame
 	public DroidSlicer()
 		throws IOException
 	{
-		configureLogging();
+		Utils.configureLogging();
 		buildMenu();
 		configureLoggingPane();
 		configureGraphPane();
@@ -104,40 +103,6 @@ public class DroidSlicer extends JFrame
 		grid.add( 0, 500, 800, 150, propsDockable);
 		loggerDockable.setExtendedMode(ExtendedMode.MINIMIZED);
 		mDockableControl.getContentArea().deploy( grid );
-	}
-	private static void configureLogging()
-		throws IOException
-	{
-		// See http://logback.qos.ch/manual/configuration.html#joranDirectly
-		URL url = DroidSlicer.class.getProtectionDomain().getCodeSource().getLocation();
-		if(url == null)
-			throw new IOException("Fail to find the code URL");
-		File configFile;
-		try
-		{
-			configFile = new File(url.toURI());
-		}
-		catch(URISyntaxException ex)
-		{
-			throw new IOException(ex);
-		}
-		configFile = new File(configFile.getParent(), "config/logback.xml");
-		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
-	    try
-	    {
-			JoranConfigurator configurator = new JoranConfigurator();
-			configurator.setContext(context);
-
-			// Call context.reset() to clear any previous configuration, e.g. default 
-			// configuration. For multi-step configuration, omit calling context.reset().
-			context.reset(); 
-			configurator.doConfigure(configFile);
-	    }
-	    catch(JoranException je)
-	    {
-	    	throw new IOException(je);
-	    }
-	    StatusPrinter.printInCaseOfErrorsOrWarnings(context);
 	}
 	private static SingleCDockable wrapInSingleDockable( String id, String title, JComponent comp )
 	{
@@ -369,7 +334,7 @@ public class DroidSlicer extends JFrame
 				writer.write(new FileOutputStream("units_info.txt"));
 			}
 			{
-				BehaviorSignaturesTester sigTester = new BehaviorSignaturesTester(graph, new File("config/semantic_signatures.xml"));
+				BehaviorSignaturesTester sigTester = new BehaviorSignaturesTester(graph, new File("config/sensitive_behavior_signatures.xml"));
 				sigTester.test(new SubProgressMonitor(monitor, 100));
 				BehaviorSupergraph supergraph = sigTester.getSupergraph();
 				if(mLogger.isDebugEnabled())

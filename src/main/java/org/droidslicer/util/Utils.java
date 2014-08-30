@@ -1,6 +1,9 @@
 package org.droidslicer.util;
 
 import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.Collection;
 import java.util.Collections;
@@ -13,6 +16,7 @@ import java.util.Set;
 import javax.swing.JFrame;
 
 import org.apache.commons.io.FileUtils;
+import org.droidslicer.DroidSlicer;
 import org.droidslicer.analysis.AndroidAnalysisContext;
 import org.droidslicer.graph.BehaviorGraphComponent;
 import org.droidslicer.graph.VisualBehaviorGraph;
@@ -22,6 +26,11 @@ import org.jgrapht.ext.JGraphXAdapter;
 import org.jgrapht.graph.ListenableDirectedGraph;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
+import ch.qos.logback.core.util.StatusPrinter;
 
 import com.google.common.base.Predicate;
 import com.ibm.wala.analysis.reflection.InstanceKeyWithNode;
@@ -70,6 +79,7 @@ public class Utils
 	// The value number of the first argument of a method
 	public static final int FIRST_ARG_VAL_NUM = 1;
 	private final static Logger mLogger = LoggerFactory.getLogger(Utils.class);
+	public final static String LOGGING_CONFIG_FILE = "config/logback.xml"; 
 	private static Set<File> mFilesRm = new HashSet<File>();
 	static
 	{
@@ -120,6 +130,40 @@ public class Utils
     	frame.setSize(800, 600);
     	frame.setVisible(true);
 	}*/
+	public static void configureLogging()
+			throws IOException
+	{
+		// See http://logback.qos.ch/manual/configuration.html#joranDirectly
+		URL url = Utils.class.getProtectionDomain().getCodeSource().getLocation();
+		if(url == null)
+			throw new IOException("Fail to find the code URL");
+		File configFile;
+		try
+		{
+			configFile = new File(url.toURI());
+		}
+		catch(URISyntaxException ex)
+		{
+			throw new IOException(ex);
+		}
+		configFile = new File(configFile.getParent(), LOGGING_CONFIG_FILE);
+		LoggerContext context = (LoggerContext) LoggerFactory.getILoggerFactory();
+	    try
+	    {
+			JoranConfigurator configurator = new JoranConfigurator();
+			configurator.setContext(context);
+
+			// Call context.reset() to clear any previous configuration, e.g. default 
+			// configuration. For multi-step configuration, omit calling context.reset().
+			context.reset(); 
+			configurator.doConfigure(configFile);
+	    }
+	    catch(JoranException je)
+	    {
+	    	throw new IOException(je);
+	    }
+	    StatusPrinter.printInCaseOfErrorsOrWarnings(context);
+	}
 	public static <V, E> void visualizeGraph(org.jgrapht.ListenableGraph<V, E> graph)
 	{
 		final mxGraph visualGraph = new JGraphXAdapter<V, E>( graph );

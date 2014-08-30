@@ -252,6 +252,13 @@ public class BehaviorGraphFocusWriter
 			throw new IllegalArgumentException();
 		mGraph = graph;
 	}
+	
+	/**
+	 * Write the important information of the behavior graph to the output stream.
+	 * The output stream is closed at the end.
+	 * @param output
+	 * @throws IOException
+	 */
 	public void write(OutputStream output)
 		throws IOException
 	{
@@ -271,6 +278,15 @@ public class BehaviorGraphFocusWriter
 		}
 		finally
 		{
+			if(output != null)
+			{
+				try
+				{
+					output.close();
+				}
+				catch(Exception ex)
+				{}
+			}
 			if(writer != null)
 			{
 				try
