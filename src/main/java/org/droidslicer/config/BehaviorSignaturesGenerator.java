@@ -28,7 +28,7 @@ import org.droidslicer.config.APIPermissionParser.APIPermission;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 
-public class SemanticSignaturesGenerator
+public class BehaviorSignaturesGenerator
 {
 	protected static class Permissions
 	{
@@ -178,7 +178,7 @@ public class SemanticSignaturesGenerator
 		HelpFormatter helpFormatter = new HelpFormatter();  
 		helpFormatter.printHelp(USAGE, options);
 	}
-	public SemanticSignaturesGenerator(
+	public BehaviorSignaturesGenerator(
 			File apiPermFile, File intentPermFile, File providerPermFile, File outputFile, boolean trackSysCompAccess, boolean filterInterestedPerms)
 		throws IOException
 	{
@@ -385,61 +385,61 @@ public class SemanticSignaturesGenerator
 	protected void writeDataSpec(Permissions perms)
 		throws XMLStreamException
 	{
-		writeStartElement(SemanticSignatureXMLElement.DATA_SPEC.getTagName());
+		writeStartElement(BehaviorSignatureXMLElement.DATA_SPEC.getTagName());
 		
 		{
-			writeStartElement(SemanticSignatureXMLElement.COMPONENT.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_IS_SYSTEM, SemanticSignatureXMLElement.V_FALSE);
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TYPE, SemanticSignatureXMLElement.V_ANY);
+			writeStartElement(BehaviorSignatureXMLElement.COMPONENT.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_IS_SYSTEM, BehaviorSignatureXMLElement.V_FALSE);
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TYPE, BehaviorSignatureXMLElement.V_ANY);
 			
 			writeComment("Invocation of permission-protected API in app");
 			for(String perm : perms.getAPIPermissions())
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				String id = getIdForAppData(getNameForPermission(perm), SemanticSignatureXMLElement.V_ANY);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, id);
-				writeEmptyElement(SemanticSignatureXMLElement.PERMISSION.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_PERMISSIONS, perm);
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				String id = getIdForAppData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_ANY);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, id);
+				writeEmptyElement(BehaviorSignatureXMLElement.PERMISSION.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_PERMISSIONS, perm);
 				writeEndElement();
 			}
 			
 			// File
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_FILE, SemanticSignatureXMLElement.V_ANY));
-				writeEmptyElement(SemanticSignatureXMLElement.FILE.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_FILE, BehaviorSignatureXMLElement.V_ANY));
+				writeEmptyElement(BehaviorSignatureXMLElement.FILE.getTagName());
 				writeEndElement();
 			}
 			
 			// Database
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_DATABASE, SemanticSignatureXMLElement.V_ANY));
-				writeEmptyElement(SemanticSignatureXMLElement.DATABASE.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_DATABASE, BehaviorSignatureXMLElement.V_ANY));
+				writeEmptyElement(BehaviorSignatureXMLElement.DATABASE.getTagName());
 				writeEndElement();
 			}
 			
 			// Shared preferences
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_SHARED_PREFERENCES, SemanticSignatureXMLElement.V_ANY));
-				writeEmptyElement(SemanticSignatureXMLElement.SHARED_PREFERENCES.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_SHARED_PREFERENCES, BehaviorSignatureXMLElement.V_ANY));
+				writeEmptyElement(BehaviorSignatureXMLElement.SHARED_PREFERENCES.getTagName());
 				writeEndElement();
 			}
 			
 			// ICC parameter caller
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_PARAM_CALLER, SemanticSignatureXMLElement.V_ANY));
-				writeEmptyElement(SemanticSignatureXMLElement.ICC_PARAM_CALLER.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_PARAM_CALLER, BehaviorSignatureXMLElement.V_ANY));
+				writeEmptyElement(BehaviorSignatureXMLElement.ICC_PARAM_CALLER.getTagName());
 				writeEndElement();
 			}
 				
 			// ICC return caller
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_RET_CALLER, SemanticSignatureXMLElement.V_ANY));
-				writeEmptyElement(SemanticSignatureXMLElement.ICC_RET_CALLER.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_RET_CALLER, BehaviorSignatureXMLElement.V_ANY));
+				writeEmptyElement(BehaviorSignatureXMLElement.ICC_RET_CALLER.getTagName());
 				writeEndElement();
 			}
 			
@@ -447,14 +447,14 @@ public class SemanticSignaturesGenerator
 		}
 		
 		{
-			writeStartElement(SemanticSignatureXMLElement.COMPONENT.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_IS_SYSTEM, SemanticSignatureXMLElement.V_FALSE);
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TYPE, SemanticSignatureXMLElement.V_RECEIVER);
+			writeStartElement(BehaviorSignatureXMLElement.COMPONENT.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_IS_SYSTEM, BehaviorSignatureXMLElement.V_FALSE);
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TYPE, BehaviorSignatureXMLElement.V_RECEIVER);
 			// ICC parameter callee of receiver
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_PARAM_CALLEE, SemanticSignatureXMLElement.V_RECEIVER));
-				writeEmptyElement(SemanticSignatureXMLElement.ICC_PARAM_CALLEE.getTagName());
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, getIdForAppData(DATA_ICC_PARAM_CALLEE, BehaviorSignatureXMLElement.V_RECEIVER));
+				writeEmptyElement(BehaviorSignatureXMLElement.ICC_PARAM_CALLEE.getTagName());
 				writeEndElement();
 			}
 			writeEndElement();
@@ -462,16 +462,16 @@ public class SemanticSignaturesGenerator
 		
 		{
 			writeComment("Sensitive-data-use point flowing out sensitive data in a system component");
-			writeStartElement(SemanticSignatureXMLElement.COMPONENT.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_IS_SYSTEM, SemanticSignatureXMLElement.V_TRUE);
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TYPE, SemanticSignatureXMLElement.V_ANY);
+			writeStartElement(BehaviorSignatureXMLElement.COMPONENT.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_IS_SYSTEM, BehaviorSignatureXMLElement.V_TRUE);
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TYPE, BehaviorSignatureXMLElement.V_ANY);
 			for(String perm : perms.getIntentReceiverPermissions())
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				String id = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_ANY);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, id);
-				writeEmptyElement(SemanticSignatureXMLElement.PERMISSION.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_PERMISSIONS, perm);
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				String id = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_ANY);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, id);
+				writeEmptyElement(BehaviorSignatureXMLElement.PERMISSION.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_PERMISSIONS, perm);
 				writeEndElement();
 			}
 			writeEndElement();
@@ -479,16 +479,16 @@ public class SemanticSignaturesGenerator
 		
 		{
 			writeComment("Sensitive-data-use point accepting data in a system receiver");
-			writeStartElement(SemanticSignatureXMLElement.COMPONENT.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_IS_SYSTEM, SemanticSignatureXMLElement.V_TRUE);
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TYPE, SemanticSignatureXMLElement.V_RECEIVER);
+			writeStartElement(BehaviorSignatureXMLElement.COMPONENT.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_IS_SYSTEM, BehaviorSignatureXMLElement.V_TRUE);
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TYPE, BehaviorSignatureXMLElement.V_RECEIVER);
 			for(String perm : perms.getIntentSenderPermissions())
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				String id = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_RECEIVER);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, id);
-				writeEmptyElement(SemanticSignatureXMLElement.PERMISSION.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_PERMISSIONS, perm);
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				String id = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_RECEIVER);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, id);
+				writeEmptyElement(BehaviorSignatureXMLElement.PERMISSION.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_PERMISSIONS, perm);
 				writeEndElement();
 			}
 			writeEndElement();
@@ -496,19 +496,19 @@ public class SemanticSignaturesGenerator
 		
 		{
 			writeComment("Sensitive-data-use point flowing in or out sensitive data in a system provider");
-			writeStartElement(SemanticSignatureXMLElement.COMPONENT.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_IS_SYSTEM, SemanticSignatureXMLElement.V_TRUE);
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TYPE, SemanticSignatureXMLElement.V_PROVIDER);
+			writeStartElement(BehaviorSignatureXMLElement.COMPONENT.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_IS_SYSTEM, BehaviorSignatureXMLElement.V_TRUE);
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TYPE, BehaviorSignatureXMLElement.V_PROVIDER);
 			SortedSet<String> providerPerms = new TreeSet<String>();
 			providerPerms.addAll(perms.getProviderReadPermissions());
 			providerPerms.addAll(perms.getProviderWritePermissions());
 			for(String perm : providerPerms)
 			{
-				writeStartElement(SemanticSignatureXMLElement.DATA.getTagName());
-				String id = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_PROVIDER);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, id);
-				writeEmptyElement(SemanticSignatureXMLElement.PERMISSION.getTagName());
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_PERMISSIONS, perm);
+				writeStartElement(BehaviorSignatureXMLElement.DATA.getTagName());
+				String id = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_PROVIDER);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, id);
+				writeEmptyElement(BehaviorSignatureXMLElement.PERMISSION.getTagName());
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_PERMISSIONS, perm);
 				writeEndElement();
 			}
 			writeEndElement();
@@ -520,26 +520,26 @@ public class SemanticSignaturesGenerator
 		throws XMLStreamException
 	{
 		mFlowIds.clear();
-		writeStartElement(SemanticSignatureXMLElement.FLOW_SPEC.getTagName());
+		writeStartElement(BehaviorSignatureXMLElement.FLOW_SPEC.getTagName());
 		{
-			writeFlows(perms, getIdForAppData(DATA_FILE, SemanticSignatureXMLElement.V_ANY), true);
-			writeFlows(perms, getIdForAppData(DATA_FILE, SemanticSignatureXMLElement.V_ANY), false);
+			writeFlows(perms, getIdForAppData(DATA_FILE, BehaviorSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForAppData(DATA_FILE, BehaviorSignatureXMLElement.V_ANY), false);
 		}
 		{
-			writeFlows(perms, getIdForAppData(DATA_DATABASE, SemanticSignatureXMLElement.V_ANY), true);
-			writeFlows(perms, getIdForAppData(DATA_DATABASE, SemanticSignatureXMLElement.V_ANY), false);
+			writeFlows(perms, getIdForAppData(DATA_DATABASE, BehaviorSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForAppData(DATA_DATABASE, BehaviorSignatureXMLElement.V_ANY), false);
 		}
 		{
-			writeFlows(perms, getIdForAppData(DATA_SHARED_PREFERENCES, SemanticSignatureXMLElement.V_ANY), true);
-			writeFlows(perms, getIdForAppData(DATA_SHARED_PREFERENCES, SemanticSignatureXMLElement.V_ANY), false);
+			writeFlows(perms, getIdForAppData(DATA_SHARED_PREFERENCES, BehaviorSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForAppData(DATA_SHARED_PREFERENCES, BehaviorSignatureXMLElement.V_ANY), false);
 		}
 		{
-			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_INTERNET), SemanticSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_INTERNET), BehaviorSignatureXMLElement.V_ANY), true);
 		}
 		{
-			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_SEND_SMS), SemanticSignatureXMLElement.V_ANY), true);
-			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_WRITE_SMS), SemanticSignatureXMLElement.V_ANY), true);
-			writeFlows(perms, getIdForSysPermissionData(getNameForPermission(PERM_WRITE_SMS), SemanticSignatureXMLElement.V_PROVIDER), true);
+			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_SEND_SMS), BehaviorSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForAppData(getNameForPermission(PERM_WRITE_SMS), BehaviorSignatureXMLElement.V_ANY), true);
+			writeFlows(perms, getIdForSysPermissionData(getNameForPermission(PERM_WRITE_SMS), BehaviorSignatureXMLElement.V_PROVIDER), true);
 		}
 		
 		if(mTrackSystemCompAccess)
@@ -547,53 +547,53 @@ public class SemanticSignaturesGenerator
 			// Receiving system broadcast
 			for(String perm : perms.getIntentReceiverPermissions())
 			{
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_ANY);
-				String to = getIdForAppData(DATA_ICC_PARAM_CALLEE, SemanticSignatureXMLElement.V_RECEIVER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_ANY);
+				String to = getIdForAppData(DATA_ICC_PARAM_CALLEE, BehaviorSignatureXMLElement.V_RECEIVER);
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);			
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);			
 			}
 			
 			// Sending broadcast to system receiver
 			for(String perm : perms.getIntentSenderPermissions())
 			{
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
-				String from = getIdForAppData(DATA_ICC_PARAM_CALLER, SemanticSignatureXMLElement.V_ANY);
-				String to = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_RECEIVER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForAppData(DATA_ICC_PARAM_CALLER, BehaviorSignatureXMLElement.V_ANY);
+				String to = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_RECEIVER);
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 			
 			// Reading system provider
 			for(String perm : perms.getProviderReadPermissions())
 			{
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_PROVIDER);
-				String to = getIdForAppData(DATA_ICC_RET_CALLER, SemanticSignatureXMLElement.V_ANY);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_PROVIDER);
+				String to = getIdForAppData(DATA_ICC_RET_CALLER, BehaviorSignatureXMLElement.V_ANY);
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 			
 			// Writing system provider
 			for(String perm : perms.getProviderWritePermissions())
 			{
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
-				String from = getIdForAppData(DATA_ICC_PARAM_CALLER, SemanticSignatureXMLElement.V_ANY);
-				String to = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_PROVIDER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForAppData(DATA_ICC_PARAM_CALLER, BehaviorSignatureXMLElement.V_ANY);
+				String to = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_PROVIDER);
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 		}
 		writeEndElement();
@@ -607,23 +607,23 @@ public class SemanticSignaturesGenerator
 				continue;
 			if(!((forward && mReadPermPred.apply(perm)) || (!forward && mWritePermPred.apply(perm))))
 				continue;
-			String from = getIdForAppData(getNameForPermission(perm), SemanticSignatureXMLElement.V_ANY);
-			writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
+			String from = getIdForAppData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_ANY);
+			writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
 			if(forward)
 			{
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 			else
 			{
 				String flowId = getIdForPermissionFlow(to, from);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, to);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, from);	
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, from);	
 			}
 		}
 		
@@ -635,13 +635,13 @@ public class SemanticSignaturesGenerator
 					continue;
 				if(!mReadPermPred.apply(perm))
 					continue;
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_ANY);
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_ANY);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 		}
 		else
@@ -652,13 +652,13 @@ public class SemanticSignaturesGenerator
 					continue;
 				if(!mWritePermPred.apply(perm))
 					continue;
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_RECEIVER);
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_RECEIVER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
 				String flowId = getIdForPermissionFlow(to, from);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, to);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, from);
 			}
 		}
 		
@@ -668,13 +668,13 @@ public class SemanticSignaturesGenerator
 			{
 				if(!mInterestedPermPred.apply(perm))
 					continue;
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_PROVIDER);
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_PROVIDER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
 				String flowId = getIdForPermissionFlow(from, to);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, from);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, to);
 			}
 		}
 		else
@@ -683,13 +683,13 @@ public class SemanticSignaturesGenerator
 			{
 				if(!mInterestedPermPred.apply(perm))
 					continue;
-				String from = getIdForSysPermissionData(getNameForPermission(perm), SemanticSignatureXMLElement.V_PROVIDER);
-				writeEmptyElement(SemanticSignatureXMLElement.FLOW.getTagName());
+				String from = getIdForSysPermissionData(getNameForPermission(perm), BehaviorSignatureXMLElement.V_PROVIDER);
+				writeEmptyElement(BehaviorSignatureXMLElement.FLOW.getTagName());
 				String flowId = getIdForPermissionFlow(to, from);
 				mFlowIds.add(flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, flowId);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_FROM, to);
-				mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_TO, from);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, flowId);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_FROM, to);
+				mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_TO, from);
 			}
 		}
 	}
@@ -715,15 +715,15 @@ public class SemanticSignaturesGenerator
 	protected void writeSignatures()
 			throws XMLStreamException
 	{
-		writeStartElement(SemanticSignatureXMLElement.SIGNATURES.getTagName());
+		writeStartElement(BehaviorSignatureXMLElement.SIGNATURES.getTagName());
 		writeComment("Signatures permission-protected-data to file");
 		for(String flowId : mFlowIds)
 		{
 			if(!flowId.startsWith("FLOW_"))
 				throw new RuntimeException();
-			writeEmptyElement(SemanticSignatureXMLElement.SIGNATURE.getTagName());
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_ID, "SIG_" + flowId.replaceFirst("FLOW_", ""));
-			mXmlWriter.writeAttribute(SemanticSignatureXMLElement.A_DEFINITION, flowId);
+			writeEmptyElement(BehaviorSignatureXMLElement.SIGNATURE.getTagName());
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_ID, "SIG_" + flowId.replaceFirst("FLOW_", ""));
+			mXmlWriter.writeAttribute(BehaviorSignatureXMLElement.A_DEFINITION, flowId);
 		}
 		writeEndElement();
 	}
@@ -742,7 +742,7 @@ public class SemanticSignaturesGenerator
 			mXmlWriter = xmlOutputFactory.createXMLStreamWriter(output, "UTF-8");
 			mXmlWriter.writeStartDocument();
 			writeComment("Auto-generated file by " + getClass().getName());
-			writeStartElement(SemanticSignatureXMLElement.SPEC.getTagName());
+			writeStartElement(BehaviorSignatureXMLElement.SPEC.getTagName());
 			writeDataSpec(perms);
 			writeFlowSpec(perms);
 			writeSignatures();
@@ -802,7 +802,7 @@ public class SemanticSignaturesGenerator
 			trackSysCompAccess = cmdLine.hasOption(CMD_TRACK_SYS_COMP_ACCESS);
 			filterInterestedPerms = cmdLine.hasOption(CMD_FILTER_INTERESTED_PERMS);
 		}
-		new SemanticSignaturesGenerator(new File(apiPermFile), new File(intentPermFile), new File(providerPermFile), new File(outputFile), trackSysCompAccess, filterInterestedPerms);
+		new BehaviorSignaturesGenerator(new File(apiPermFile), new File(intentPermFile), new File(providerPermFile), new File(outputFile), trackSysCompAccess, filterInterestedPerms);
 	}
 }
 

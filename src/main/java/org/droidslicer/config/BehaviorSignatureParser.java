@@ -170,7 +170,7 @@ public class BehaviorSignatureParser
 			throw new RuntimeException("Unsupported");
 		}
 	}
-	private final Map<String, SemanticSignatureXMLElement> mEleMap = new HashMap<String, SemanticSignatureXMLElement>();
+	private final Map<String, BehaviorSignatureXMLElement> mEleMap = new HashMap<String, BehaviorSignatureXMLElement>();
 	private XMLStreamReader mXmlReader;
 	private final Collection<BehaviorSignature> mSemSigs = new ArrayList<BehaviorSignature>();
 	private final CharMatcher mIdAllowedChars;
@@ -201,7 +201,7 @@ public class BehaviorSignatureParser
 		XMLInputFactory factory = XMLInputFactory.newInstance();
 		try
 		{
-			for(SemanticSignatureXMLElement ele : SemanticSignatureXMLElement.values())
+			for(BehaviorSignatureXMLElement ele : BehaviorSignatureXMLElement.values())
 			{
 				mEleMap.put(ele.getTagName(), ele);
 			}
@@ -333,8 +333,8 @@ public class BehaviorSignatureParser
 				!(toSigSpec instanceof UnitSignaturesUnion))
 			{
 				throw new IllegalArgumentException(
-					"Expecting the attribute value of " + SemanticSignatureXMLElement.A_FROM + " and " + 
-					SemanticSignatureXMLElement.A_TO + " to be ID of unit signature");
+					"Expecting the attribute value of " + BehaviorSignatureXMLElement.A_FROM + " and " + 
+					BehaviorSignatureXMLElement.A_TO + " to be ID of unit signature");
 			}
 			UnitSignaturesUnion fromSig = (UnitSignaturesUnion)fromSigSpec;
 			UnitSignaturesUnion toSig = (UnitSignaturesUnion)toSigSpec;
@@ -428,33 +428,33 @@ public class BehaviorSignatureParser
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_TYPE))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_TYPE))
 			{
-				if(attrVal.equals(SemanticSignatureXMLElement.V_ACTIVITY))
+				if(attrVal.equals(BehaviorSignatureXMLElement.V_ACTIVITY))
 					mCompType = ActivityUnit.class;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_RECEIVER))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_RECEIVER))
 					mCompType = ReceiverUnit.class;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_SERVICE))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_SERVICE))
 					mCompType = ServiceUnit.class;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_PROVIDER))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_PROVIDER))
 					mCompType = ProviderUnit.class;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_APPLICATION))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_APPLICATION))
 					mCompType = ApplicationUnit.class;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_ANY))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_ANY))
 					mCompType = null;
 				else
-					throw new XMLStreamException(getMessagePrefix() + "Illegal value for attribute " + SemanticSignatureXMLElement.A_TYPE);		
+					throw new XMLStreamException(getMessagePrefix() + "Illegal value for attribute " + BehaviorSignatureXMLElement.A_TYPE);		
 			}
-			else if(attrName.equals(SemanticSignatureXMLElement.A_IS_SYSTEM))
+			else if(attrName.equals(BehaviorSignatureXMLElement.A_IS_SYSTEM))
 			{
-				if(attrVal.equals(SemanticSignatureXMLElement.V_TRUE))
+				if(attrVal.equals(BehaviorSignatureXMLElement.V_TRUE))
 					mIsSystemComp = true;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_FALSE))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_FALSE))
 					mIsSystemComp = false;
-				else if(attrVal.equals(SemanticSignatureXMLElement.V_ANY))
+				else if(attrVal.equals(BehaviorSignatureXMLElement.V_ANY))
 					mIsSystemComp = null;
 				else
-					throw new XMLStreamException(getMessagePrefix() + "Illegal value for attribute " + SemanticSignatureXMLElement.A_IS_SYSTEM);					
+					throw new XMLStreamException(getMessagePrefix() + "Illegal value for attribute " + BehaviorSignatureXMLElement.A_IS_SYSTEM);					
 			}
 			else 
 				throw new XMLStreamException(getMessagePrefix() + "Illegal attribute " + attrName);
@@ -468,34 +468,34 @@ public class BehaviorSignatureParser
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_ID))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_ID))
 			{
 				mDataId = attrVal;
 				if(!mIdAllowedChars.matchesAllOf(mDataId))
-					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + SemanticSignatureXMLElement.A_ID);
+					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + BehaviorSignatureXMLElement.A_ID);
 			}
 			else 
 				throw new XMLStreamException(getMessagePrefix() + "Illegal attribute \"" + attrName + "\"");
 		}
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Expecting attribute " + SemanticSignatureXMLElement.A_ID);
+			throw new XMLStreamException(getMessagePrefix() + "Expecting attribute " + BehaviorSignatureXMLElement.A_ID);
 		UnitSignaturesUnion sigs = new UnitSignaturesUnion();
 		if(mSigSpecs.containsKey(mDataId))
-			throw new XMLStreamException(getMessagePrefix() + "Duplication ID for <" + SemanticSignatureXMLElement.DATA.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Duplication ID for <" + BehaviorSignatureXMLElement.DATA.getTagName() + ">");
 		mSigSpecs.put(mDataId, sigs);
 	}
 	protected void onElePermission()	
 		throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.PERMISSION.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.PERMISSION.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		PermUnitSignature sig = new PermUnitSignature(mCompType, mIsSystemComp);
 		for(int i = 0; i < nAttr; ++i)
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_PERMISSIONS))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_PERMISSIONS))
 			{
 				String[] toks = attrVal.split(";");
 				for(String tok : toks)
@@ -525,14 +525,14 @@ public class BehaviorSignatureParser
 		throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.FILE.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.FILE.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		ConcreteValue pathVal = UnknownValue.getInstance();
 		for(int i = 0; i < nAttr; ++i)
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_PATH))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_PATH))
 			{
 				pathVal = ConstantStringValue.fromAndroidSimpleGlob(attrVal);
 			}
@@ -547,7 +547,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.DATABASE.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.DATABASE.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -562,7 +562,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.SHARED_PREFERENCES.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.SHARED_PREFERENCES.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -577,7 +577,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.SOCKET.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.SOCKET.getTagName() + ">");
 		ConcreteValue addrVal = UnknownValue.getInstance();
 		int port = -1;
 		int nAttr = mXmlReader.getAttributeCount();
@@ -585,11 +585,11 @@ public class BehaviorSignatureParser
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_ADDR))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_ADDR))
 			{
 				addrVal = ConstantStringValue.fromAndroidSimpleGlob(attrVal);
 			}
-			else if(attrName.equals(SemanticSignatureXMLElement.A_PORT))
+			else if(attrName.equals(BehaviorSignatureXMLElement.A_PORT))
 			{
 				try
 				{
@@ -597,7 +597,7 @@ public class BehaviorSignatureParser
 				}
 				catch(NumberFormatException ex)
 				{
-					throw new XMLStreamException("Attribute value of \"" + SemanticSignatureXMLElement.A_PORT + "\" must be integer");
+					throw new XMLStreamException("Attribute value of \"" + BehaviorSignatureXMLElement.A_PORT + "\" must be integer");
 				}
 			}
 			else 
@@ -612,7 +612,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.URL_CONN.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.URL_CONN.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -627,7 +627,7 @@ public class BehaviorSignatureParser
 		throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.ICC_PARAM_CALLER.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.ICC_PARAM_CALLER.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -642,7 +642,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.ICC_PARAM_CALLEE.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.ICC_PARAM_CALLEE.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -657,7 +657,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.ICC_RET_CALLER.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.ICC_RET_CALLER.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -672,7 +672,7 @@ public class BehaviorSignatureParser
 			throws XMLStreamException
 	{
 		if(mDataId == null)
-			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + SemanticSignatureXMLElement.ICC_RET_CALLEE.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Illegal position of <" + BehaviorSignatureXMLElement.ICC_RET_CALLEE.getTagName() + ">");
 		int nAttr = mXmlReader.getAttributeCount();
 		if(nAttr > 0)
 		{
@@ -692,15 +692,15 @@ public class BehaviorSignatureParser
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_ID))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_ID))
 			{
 				id = attrVal;
 				if(!mIdAllowedChars.matchesAllOf(id))
-					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + SemanticSignatureXMLElement.A_ID);
+					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + BehaviorSignatureXMLElement.A_ID);
 			}
-			else if(attrName.equals(SemanticSignatureXMLElement.A_FROM))
+			else if(attrName.equals(BehaviorSignatureXMLElement.A_FROM))
 				from = attrVal;
-			else if(attrName.equals(SemanticSignatureXMLElement.A_TO))
+			else if(attrName.equals(BehaviorSignatureXMLElement.A_TO))
 				to = attrVal;
 			else
 				throw new XMLStreamException(getMessagePrefix() + "Illegal attribute " + attrName);
@@ -708,11 +708,11 @@ public class BehaviorSignatureParser
 		if(id == null || from == null)
 		{
 			throw new XMLStreamException(getMessagePrefix() + 
-				"Attributes " + SemanticSignatureXMLElement.A_ID + ", " + 
-				SemanticSignatureXMLElement.A_FROM + " are necessary");
+				"Attributes " + BehaviorSignatureXMLElement.A_ID + ", " + 
+				BehaviorSignatureXMLElement.A_FROM + " are necessary");
 		}
 		if(mSigSpecs.containsKey(id))
-			throw new XMLStreamException(getMessagePrefix() + "Duplicate ID of <" + SemanticSignatureXMLElement.FLOW.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Duplicate ID of <" + BehaviorSignatureXMLElement.FLOW.getTagName() + ">");
 		mSigSpecs.put(id, new FlowSpec(from, to));
 	}
 	protected void onEleSignature()
@@ -724,13 +724,13 @@ public class BehaviorSignatureParser
 		{
 			String attrName = mXmlReader.getAttributeLocalName(i);
 			String attrVal = mXmlReader.getAttributeValue(i);
-			if(attrName.equals(SemanticSignatureXMLElement.A_ID))
+			if(attrName.equals(BehaviorSignatureXMLElement.A_ID))
 			{
 				id = attrVal;
 				if(!mIdAllowedChars.matchesAllOf(id))
-					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + SemanticSignatureXMLElement.A_ID);
+					throw new XMLStreamException(getMessagePrefix() + "Illegal characters in attribute " + BehaviorSignatureXMLElement.A_ID);
 			}
-			else if(attrName.equals(SemanticSignatureXMLElement.A_DEFINITION))
+			else if(attrName.equals(BehaviorSignatureXMLElement.A_DEFINITION))
 				desc = attrVal;
 			else
 				throw new XMLStreamException(getMessagePrefix() + "Illegal attribute " + attrName);
@@ -738,18 +738,18 @@ public class BehaviorSignatureParser
 		if(id == null || desc == null)
 		{
 			throw new XMLStreamException(getMessagePrefix() + 
-				"Attributes " + SemanticSignatureXMLElement.A_ID + " and " + 
-				SemanticSignatureXMLElement.A_DEFINITION  + " are necessary");
+				"Attributes " + BehaviorSignatureXMLElement.A_ID + " and " + 
+				BehaviorSignatureXMLElement.A_DEFINITION  + " are necessary");
 		}
 		if(mSemSigsDesc.containsKey(id))
-			throw new XMLStreamException(getMessagePrefix() + "Duplicate ID of <" + SemanticSignatureXMLElement.SIGNATURE.getTagName() + ">");
+			throw new XMLStreamException(getMessagePrefix() + "Duplicate ID of <" + BehaviorSignatureXMLElement.SIGNATURE.getTagName() + ">");
 		mSemSigsDesc.put(id, desc);
 	}
 	protected void onStartElement()
 		throws XMLStreamException
 	{
 		String eleName = mXmlReader.getLocalName();
-		SemanticSignatureXMLElement ele = mEleMap.get(eleName);
+		BehaviorSignatureXMLElement ele = mEleMap.get(eleName);
 		if(ele == null)
 			throw new XMLStreamException(getMessagePrefix() + "Invalid element name " + eleName);
 		switch(ele)
@@ -812,7 +812,7 @@ public class BehaviorSignatureParser
 		throws XMLStreamException
 	{
 		String eleName = mXmlReader.getLocalName();
-		SemanticSignatureXMLElement ele = mEleMap.get(eleName);
+		BehaviorSignatureXMLElement ele = mEleMap.get(eleName);
 		if(ele == null)
 			throw new XMLStreamException(getMessagePrefix() + "Invalid element name " + eleName);
 		switch(ele)

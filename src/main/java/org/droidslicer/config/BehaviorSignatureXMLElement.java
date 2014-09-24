@@ -1,6 +1,6 @@
 package org.droidslicer.config;
 
-public enum SemanticSignatureXMLElement
+public enum BehaviorSignatureXMLElement
 {
 	SPEC("spec"),
 	DATA_SPEC("data-spec"),
@@ -39,7 +39,7 @@ public enum SemanticSignatureXMLElement
 	public final static String V_APPLICATION = "application";
 	public final static String V_ANY = "any";
 	private final String mTagName;
-	private SemanticSignatureXMLElement(String tagName) 
+	private BehaviorSignatureXMLElement(String tagName) 
 	{
 		mTagName = tagName;
 	}
