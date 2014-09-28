@@ -10,8 +10,8 @@ In the following, the purpose of each files in the directory will be illustrated
 The configuration file for the logging library [logback].
 
 **config/sensitive_behavior_signature.xml**  
-This file define the sensitive behavior signatures for matching with the app. For the meaning of a sensitive behavior signature, see the paper.
-For the detail, see [here](sb_sig.html).
+This file define the sensitive behavior signatures for matching with the app. For the meaning of a sensitive behavior signature, see the paper.  
+For the details of this XML file, see [here](sb_sig.html).
 
 **config/android/apiXXX/**  
 This directory contains the configuration files for Android api version XXX.  

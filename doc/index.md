@@ -98,7 +98,7 @@ src: Source code.
 The image files for this document.  
 
 ### config/ ### 
-This directory contains the configuration files, Android library files, auxiliary data, etc. For the detail, see [this](config.html) page. 
+This directory contains the configuration files, Android library files, auxiliary data, etc. For the details, see [this](config.html) page. 
 
 # Javadoc #
 See [here](apidoc/index.html)
