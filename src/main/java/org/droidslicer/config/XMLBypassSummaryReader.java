@@ -517,29 +517,9 @@ public class XMLBypassSummaryReader
 			
 			mSummaries.put(ref, mGoverningMethod);
 		
-			// This is somewhat gross, but it is to deal with the fact that
-			// some non-Java languages have notions of arguments that do not
-			// map nicely to descriptors.
-			int nParams = -1;
-			String specifiedArgs = atts.getValue(A_NUM_ARGS);
-			if (specifiedArgs == null)
-			{
-				nParams = ref.getNumberOfParameters();
-				if (!mGoverningMethod.isStatic())
-					nParams += 1;
-			}
-			else
-			{
-				try
-				{
-					nParams = Integer.parseInt(specifiedArgs);
-				}
-				catch(NumberFormatException ex)
-				{
-					throwException("Invalid integer for attribute " + A_NUM_ARGS);
-					assert false;
-				}
-			}
+			int nParams = ref.getNumberOfParameters();
+			if (!mGoverningMethod.isStatic())
+				nParams += 1;
 		
 			// Note that symbol tables reserve v0 for "unknown", so v1 gets assigned
 			// to the first parameter "arg0", and so forth.

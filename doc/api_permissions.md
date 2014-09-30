@@ -3,20 +3,9 @@ To detect access to sensitive data, we need to know which API will access which 
 
 *config/apiXXX/api_permissions.xml* is a file for defining the relation between API's and permissions, where *XXX* is the Android API level. It is a XML file, and its format will be described below. The parser implementation is *org.droidslicer.config.APIPermissionParser*.
 
-## &lt;api-spec&gt; and &lt;class-loader&gt; ##
-The root element is *&lt;api-spec&gt;*, and there can be several *&lt;class-loader&gt;* elements. The *&lt;class-loader&gt;* elements are to distinguish the classes that are defined in different namespaces, and they mimics the class loaders in Java. *&lt;class-loader&gt;* can have an attribute *name*, which define the name of the class loader.
-
-Following are the available class loaders.
-
-- Primordial  
-A class loader for Android library code.  
-- Application  
-A class loader for app code in classes.dex (a file in APK for storing app code).  
-- Extension  
-A class loader for the app code which is not in classes.dex, but is dynamically loaded. (Currently not supported by our system)  
-
-
-Because we want to define the permissions of APIs in Android library, normally there should be only one *&lt;class-loader&gt;* element with *name* being Primordial.  
+## Format ##
+### &lt;api-spec&gt; and &lt;class-loader&gt; ###
+The root element is *&lt;api-spec&gt;*, and there can be several *&lt;class-loader&gt;* elements. The *&lt;class-loader&gt;* elements are to distinguish the classes that are defined in different namespaces. For the meaning of a class loader here, see [here](class_loader.html). A *&lt;class-loader&gt;* element can have an attribute *name*, which defines the name of the class loader, e.g. Primordial. Because we want to define the permissions of APIs in Android library, normally there should be only one *&lt;class-loader&gt;* element with *name* being *Primordial*.  
 
 Under a *&lt;class-loader&gt;* element, the hierarchy looks like below.
 
@@ -30,15 +19,15 @@ Under a *&lt;class-loader&gt;* element, the hierarchy looks like below.
 
 For each of *&lt;package&gt;*, *&lt;class&gt;*, and *&lt;method&gt;* elements, there can be multiple children of the type of its next one. For example, there can be multiple *&lt;class&gt;* elements under a *&lt;package&gt;* element.
 
-## &lt;package&gt; ##
+### &lt;package&gt; ###
 Each *&lt;package&gt;* element describes a package that would be loaded by a class loader. It can have an attribute *name*, which defines the name of the package, e.g. *android.app*.  
 
 
-## &lt;class&gt; ##
+### &lt;class&gt; ###
 Each *&lt;class&gt;* element decribes a class inside a package. It can have an attribute *name*, which defines the name of the class, e.g. *Activity*.
 
 
-## &lt;method&gt; ##
+### &lt;method&gt; ###
 Each *&lt;method&gt;* element describes a method inside a class. It can have the following attributes.
 
 - signature  
@@ -60,3 +49,13 @@ It is a comma-seperated seperated list of options. param{i} describes the option
     - trackListener  
     When a listener is registered, the listener may be invoked later by the Android framework. And when it happens, some data may be passed as arguments of the invocation. This option defines whether the dataflow *from* the arguments of the invocation should be tracked.
 
+## Construction ##
+[PScout] is a tool for analyzing the Android permission specification. One of its output is the mapping between permissions and Android API. You may download the file of the mapping from its official website, and utilize our helper class *org.droidslicer.pscout.PScoutAPIPermToXML* to generate the configuration file for API permissions.
+
+For the detail usage of the class, launch our tool with it as main class without arguments.
+
+    java -jar DroidSlicer.jar org.droidslicer.pscout.PScoutAPIPermToXML
+
+
+
+[PScout]:http://pscout.csl.toronto.edu/

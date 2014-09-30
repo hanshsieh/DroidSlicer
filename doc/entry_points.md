@@ -18,3 +18,9 @@ Each *&lt;method&gt;* element defines an entry point of the component. It can co
 The signature of the method. E.g. *void onActionModeFinished(android.view.ActionMode)*. For further information, see [here](method_sig.html). (Required)
 - static  
 It defines whether the method is static or not. The allowed values are "true" and "false". (Required)
+
+## Construction ##
+Our tool provides a helper class *org.droidslicer.config.EntryPointFindingHelper* to help you construct this configuration file. It uses some simple heuristics to decide whether a method of a component class is a entry point. For the detail usage of the class, launch our tool with the class as the main class without arguments.
+
+    java -jar DroidSlicer.jar org.droidslicer.config.EntryPointFindingHelper
+
