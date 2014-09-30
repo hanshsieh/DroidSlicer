@@ -1,8 +1,8 @@
 # Configuration #
 In this chapter, we will illustrate the configuration of our system.  
-The configuration files are stored in directory **config**.  
+The configuration files are stored in directory *config*.  
 
-For each supported Android API version, there's a directory **apiXXX** in the directory. There should be at least **apiXXX** directory. During analysis, our tool will select the library version that best fit for the need of the app.
+For each supported Android API version, there's a directory *apiXXX* in the directory. There should be at least *apiXXX* directory. During analysis, our tool will select the library version that best fit for the need of the app.
 
 In the following, the purpose of each files in the directory will be illustrated.
 
@@ -44,6 +44,6 @@ See [here](method_summary.html).
 See [here](provider_permissions.html).
 
 **config/android/apiXXX/regression_exclusions.txt**  
-See [here](regression_exclusions.html).
+See [here](analysis_exclusion.html).
 
 [logback]:http://logback.qos.ch
