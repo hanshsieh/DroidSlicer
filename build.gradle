@@ -17,6 +17,16 @@ apply plugin: 'org.kordamp.gradle.markdown'
 
 mainClassName = 'org.droidslicer.DroidSlicer'
 
+// We uses java.nio.file, which was introduced in JDK 7
+sourceCompatibility = 1.7
+version = 1.0
+compileJava {
+	// This only works when forking and passing 'javac' as an executable
+	options.compilerArgs << '-Xlint:deprecation'
+	options.fork = true
+	options.forkOptions.executable = 'javac'
+} 
+
 repositories {
     mavenCentral()
 	maven {
@@ -38,6 +48,7 @@ eclipse {
 		}
     }
 }
+
 dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '17.0'
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.2'

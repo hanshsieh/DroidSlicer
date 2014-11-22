@@ -12,6 +12,8 @@ package org.droidslicer.ifds;
 
 import java.util.Iterator;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterators;
 import com.ibm.wala.dataflow.IFDS.ISupergraph;
 import com.ibm.wala.ipa.callgraph.CGNode;
 import com.ibm.wala.ipa.slicer.ExceptionalReturnCaller;
@@ -27,8 +29,6 @@ import com.ibm.wala.ipa.slicer.Slicer.ControlDependenceOptions;
 import com.ibm.wala.ipa.slicer.Statement;
 import com.ibm.wala.ssa.SSAAbstractInvokeInstruction;
 import com.ibm.wala.util.collections.EmptyIterator;
-import com.ibm.wala.util.collections.Filter;
-import com.ibm.wala.util.collections.FilterIterator;
 import com.ibm.wala.util.debug.Assertions;
 import com.ibm.wala.util.graph.Graph;
 import com.ibm.wala.util.intset.IntSet;
@@ -109,15 +109,13 @@ public class SDGSupergraph implements ISupergraph<Statement, PDG>
 		switch (call.getKind()) 
 		{
 		case NORMAL:
-			Filter f = new Filter() 
-			{
-				public boolean accepts(Object o) 
-				{
-					Statement s = (Statement) o;
-					return isEntry(s);
+			return Iterators.filter(getSuccNodes(call), new Predicate<Statement>(){
+				@Override
+				public boolean apply(Statement stm) {
+					return isEntry(stm);
 				}
-			};
-			return new FilterIterator<Statement>(getSuccNodes(call), f);
+				
+			});
 		case PARAM_CALLER:
 		case HEAP_PARAM_CALLER:
 			return getSuccNodes(call);
